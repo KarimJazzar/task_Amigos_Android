@@ -3,26 +3,26 @@ package com.example.task_amigos_android;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Task {
+public class TaskModel {
     private int id;
     private String name;
     private String description;
     private String category;
     private boolean status;
-    private ArrayList<Task> subTasks;
+    private ArrayList<TaskModel> subTaskModels;
     private ArrayList<String> images;
     private ArrayList<String> audios;
     private Date dueDate;
     private Date createdDate;
     private  boolean isSubtask;
 
-    public Task(int id, String name, String description, String category, boolean status, ArrayList<Task> subTasks, ArrayList<String> images, ArrayList<String> audios, Date dueDate, Date createdDate, boolean isSubtask) {
+    public TaskModel(int id, String name, String description, String category, boolean status, ArrayList<TaskModel> subTaskModels, ArrayList<String> images, ArrayList<String> audios, Date dueDate, Date createdDate, boolean isSubtask) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.category = category;
         this.status = status;
-        this.subTasks = subTasks;
+        this.subTaskModels = subTaskModels;
         this.images = images;
         this.audios = audios;
         this.dueDate = dueDate;
@@ -72,12 +72,12 @@ public class Task {
         this.status = status;
     }
 
-    public ArrayList<Task> getSubTasks() {
-        return subTasks;
+    public ArrayList<TaskModel> getSubTasks() {
+        return subTaskModels;
     }
 
-    public void setSubTasks(ArrayList<Task> subTasks) {
-        this.subTasks = subTasks;
+    public void setSubTasks(ArrayList<TaskModel> subTaskModels) {
+        this.subTaskModels = subTaskModels;
     }
 
     public ArrayList<String> getImages() {
