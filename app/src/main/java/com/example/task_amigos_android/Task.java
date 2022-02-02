@@ -9,14 +9,14 @@ public class Task {
     private String description;
     private String category;
     private boolean status;
-    private ArrayList<Task> subTasks;
+    private ArrayList<Integer> subTasks;
     private ArrayList<String> images;
     private ArrayList<String> audios;
     private Date dueDate;
     private Date createdDate;
     private  boolean isSubtask;
 
-    public Task(int id, String name, String description, String category, boolean status, ArrayList<Task> subTasks, ArrayList<String> images, ArrayList<String> audios, Date dueDate, Date createdDate, boolean isSubtask) {
+    public Task(int id, String name, String description, String category, boolean status, ArrayList<Integer> subTasks, ArrayList<String> images, ArrayList<String> audios, Date dueDate, Date createdDate, boolean isSubtask) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -29,7 +29,7 @@ public class Task {
         this.createdDate = createdDate;
         this.isSubtask = isSubtask;
     }
-    
+
     //getters and setters
 
     public int getId() {
@@ -72,11 +72,11 @@ public class Task {
         this.status = status;
     }
 
-    public ArrayList<Task> getSubTasks() {
+    public ArrayList<Integer> getSubTasks() {
         return subTasks;
     }
 
-    public void setSubTasks(ArrayList<Task> subTasks) {
+    public void setSubTasks(ArrayList<Integer> subTasks) {
         this.subTasks = subTasks;
     }
 
