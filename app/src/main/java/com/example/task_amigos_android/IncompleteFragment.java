@@ -67,7 +67,6 @@ public class IncompleteFragment extends Fragment {
                     }
                 }
                 TaskAdapter ia = new TaskAdapter(getContext(), searchedTasks);
-                //ia.notifyDataSetChanged();
                 incompleteT.setAdapter(ia);
 
                 return false;

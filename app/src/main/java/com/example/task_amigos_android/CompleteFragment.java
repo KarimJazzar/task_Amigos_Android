@@ -1,6 +1,7 @@
 package com.example.task_amigos_android;
 
 import static com.example.task_amigos_android.MainActivity.completeTaskModels;
+import static com.example.task_amigos_android.MainActivity.incompleteTaskModels;
 
 import android.os.Bundle;
 
@@ -11,6 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.SearchView;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -51,6 +55,7 @@ public class CompleteFragment extends Fragment {
     }
 
     ListView completeT;
+    SearchView searchTask;
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -58,6 +63,29 @@ public class CompleteFragment extends Fragment {
         TaskAdapter ia = new TaskAdapter(getContext(), completeTaskModels);
         ia.notifyDataSetChanged();
         completeT.setAdapter(ia);
+
+        searchTask = (SearchView) view.findViewById(R.id.completeListSearchView);
+        searchTask.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                ArrayList<TaskModel> searchedTasks = new ArrayList<TaskModel>();
+
+                for(TaskModel task: completeTaskModels){
+                    if(task.getName().toLowerCase().contains(newText.toLowerCase())){
+                        searchedTasks.add(task);
+                    }
+                }
+                TaskAdapter ia = new TaskAdapter(getContext(), searchedTasks);
+                completeT.setAdapter(ia);
+
+                return false;
+            }
+        });
     }
 
     @Override
