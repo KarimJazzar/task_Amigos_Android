@@ -3,7 +3,7 @@ package com.example.task_amigos_android;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Task {
+public class TaskModel {
     private int id;
     private String name;
     private String description;
@@ -16,7 +16,7 @@ public class Task {
     private Date createdDate;
     private  boolean isSubtask;
 
-    public Task(int id, String name, String description, String category, boolean status, ArrayList<Integer> subTasks, ArrayList<String> images, ArrayList<String> audios, Date dueDate, Date createdDate, boolean isSubtask) {
+    public TaskModel(int id, String name, String description, String category, boolean status, ArrayList<Integer> subTasks, ArrayList<String> images, ArrayList<String> audios, Date dueDate, Date createdDate, boolean isSubtask) {
         this.id = id;
         this.name = name;
         this.description = description;

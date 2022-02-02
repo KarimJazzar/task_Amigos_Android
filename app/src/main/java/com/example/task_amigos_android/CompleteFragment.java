@@ -1,7 +1,6 @@
 package com.example.task_amigos_android;
 
-import static com.example.task_amigos_android.MainActivity.completeTasks;
-import static com.example.task_amigos_android.MainActivity.incompleteTasks;
+import static com.example.task_amigos_android.MainActivity.completeTaskModels;
 
 import android.os.Bundle;
 
@@ -56,7 +55,7 @@ public class CompleteFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         completeT = (ListView) view.findViewById(R.id.completeTasks);
-        TaskAdapter ia = new TaskAdapter(getContext(),completeTasks);
+        TaskAdapter ia = new TaskAdapter(getContext(), completeTaskModels);
         ia.notifyDataSetChanged();
         completeT.setAdapter(ia);
     }

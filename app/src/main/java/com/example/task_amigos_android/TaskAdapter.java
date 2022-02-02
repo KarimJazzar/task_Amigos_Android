@@ -5,17 +5,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 public class TaskAdapter extends BaseAdapter {
-    ArrayList<Task> data=new ArrayList<>();
+    ArrayList<TaskModel> data=new ArrayList<>();
     LayoutInflater inflater;//
 
     //constructor
-    public TaskAdapter(Context context, ArrayList<Task>data)
+    public TaskAdapter(Context context, ArrayList<TaskModel>data)
     {
         this.data=data;
         inflater=LayoutInflater.from(context);

@@ -1,6 +1,6 @@
 package com.example.task_amigos_android;
 
-import static com.example.task_amigos_android.MainActivity.incompleteTasks;
+import static com.example.task_amigos_android.MainActivity.incompleteTaskModels;
 
 import android.os.Bundle;
 
@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class IncompleteFragment extends Fragment {
@@ -42,7 +41,7 @@ public class IncompleteFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         incompleteT = (ListView) view.findViewById(R.id.incompleteTasks);
-        TaskAdapter ia = new TaskAdapter(getContext(),incompleteTasks);
+        TaskAdapter ia = new TaskAdapter(getContext(), incompleteTaskModels);
         ia.notifyDataSetChanged();
         incompleteT.setAdapter(ia);
     }

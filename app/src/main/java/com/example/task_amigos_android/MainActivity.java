@@ -15,8 +15,8 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static ArrayList<Task> incompleteTasks;
-    public static ArrayList<Task> completeTasks;
+    public static ArrayList<TaskModel> incompleteTaskModels;
+    public static ArrayList<TaskModel> completeTaskModels;
 
     TabLayout tabLayout;
     ViewPager2 pager;
@@ -27,14 +27,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        incompleteTasks = new ArrayList<>();
-        completeTasks = new ArrayList<>();
+        incompleteTaskModels = new ArrayList<>();
+        completeTaskModels = new ArrayList<>();
 
-        incompleteTasks.add(new Task(1,"Incomplete 1","first incomplete task","Work",false, new ArrayList<>(),new ArrayList<>(),new ArrayList<>(), parseDate("2014-02-14"),parseDate("2014-02-14"),false));
-        incompleteTasks.add(new Task(2,"Incomplete 2","second incomplete task","Work",false, new ArrayList<>(),new ArrayList<>(),new ArrayList<>(), parseDate("2014-02-14"),parseDate("2014-02-14"),false));
+        incompleteTaskModels.add(new TaskModel(1,"Incomplete 1","first incomplete task","Work",false, new ArrayList<>(),new ArrayList<>(),new ArrayList<>(), parseDate("2014-02-14"),parseDate("2014-02-14"),false));
+        incompleteTaskModels.add(new TaskModel(2,"Incomplete 2","second incomplete task","Work",false, new ArrayList<>(),new ArrayList<>(),new ArrayList<>(), parseDate("2014-02-14"),parseDate("2014-02-14"),false));
 
-        completeTasks.add(new Task(1,"Complete 1","first incomplete task","Work",true, new ArrayList<>(),new ArrayList<>(),new ArrayList<>(), parseDate("2014-02-14"),parseDate("2014-02-14"),false));
-        completeTasks.add(new Task(1,"Complete 2","second incomplete task","Work",true, new ArrayList<>(),new ArrayList<>(),new ArrayList<>(), parseDate("2014-02-14"),parseDate("2014-02-14"),false));
+        completeTaskModels.add(new TaskModel(1,"Complete 1","first incomplete task","Work",true, new ArrayList<>(),new ArrayList<>(),new ArrayList<>(), parseDate("2014-02-14"),parseDate("2014-02-14"),false));
+        completeTaskModels.add(new TaskModel(1,"Complete 2","second incomplete task","Work",true, new ArrayList<>(),new ArrayList<>(),new ArrayList<>(), parseDate("2014-02-14"),parseDate("2014-02-14"),false));
 
 
         tabLayout = findViewById(R.id.tab_layout);
