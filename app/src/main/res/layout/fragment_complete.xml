@@ -5,9 +5,18 @@
     android:layout_height="match_parent"
     tools:context=".CompleteFragment">
 
+    <SearchView
+        android:id="@+id/completeListSearchView"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:iconifiedByDefault="false"
+        android:queryHint="Complete Task Name"></SearchView>
+
     <ListView
         android:id="@+id/completeTasks"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="691dp"
+        android:translationY="40dp"
+        />
 
 </FrameLayout>

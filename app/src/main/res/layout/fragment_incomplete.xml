@@ -5,8 +5,16 @@
     android:layout_height="match_parent"
     tools:context=".IncompleteFragment">
 
+    <SearchView
+        android:id="@+id/incompleteListSearchView"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:iconifiedByDefault="false"
+        android:queryHint="Incomplete Task Name"></SearchView>
+
     <ListView
         android:id="@+id/incompleteTasks"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="691dp"
+        android:translationY="40dp" />
 </FrameLayout>
