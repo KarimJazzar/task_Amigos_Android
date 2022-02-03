@@ -10,13 +10,14 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class IncompleteFragment extends Fragment {
+public class IncompleteFragment extends Fragment implements View.OnClickListener{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -42,6 +43,9 @@ public class IncompleteFragment extends Fragment {
 
     ListView incompleteT;
     SearchView searchTask;
+    Button all,work,school,shopping,groceries;
+    private String selectedFilter = "all";
+    private String currentFilterText = "";
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -60,6 +64,7 @@ public class IncompleteFragment extends Fragment {
             @Override
             public boolean onQueryTextChange(String newText) {
                 ArrayList<TaskModel> searchedTasks = new ArrayList<TaskModel>();
+                currentFilterText = newText;
 
                 for(TaskModel task: incompleteTaskModels){
                     if(task.getName().toLowerCase().contains(newText.toLowerCase())){
@@ -72,6 +77,49 @@ public class IncompleteFragment extends Fragment {
                 return false;
             }
         });
+
+        all = (Button) view.findViewById(R.id.allFilter);
+        work = (Button) view.findViewById(R.id.workFilter);
+        school = (Button) view.findViewById(R.id.schoolFilter);
+        shopping = (Button) view.findViewById(R.id.shoppingFilter);
+        groceries = (Button) view.findViewById(R.id.groceriesFilter);
+
+        all.setOnClickListener(this);
+        work.setOnClickListener(this);
+        school.setOnClickListener(this);
+        shopping.setOnClickListener(this);
+        groceries.setOnClickListener(this);
+
+    }
+
+    private void filterList(String category)
+    {
+        selectedFilter = category;
+
+        ArrayList<TaskModel> filteredTasks = new ArrayList<TaskModel>();
+
+        for(TaskModel task: incompleteTaskModels)
+        {
+            if(task.getCategory().toLowerCase().contains(category)){
+                if(currentFilterText == "")
+                {
+                    filteredTasks.add(task);
+                }
+                else
+                {
+                    if(task.getName().toLowerCase().contains(currentFilterText.toLowerCase()))
+                    {
+                        filteredTasks.add(task);
+
+                    }
+
+                }
+            }
+
+        }
+
+        TaskAdapter ia = new TaskAdapter(getContext(), filteredTasks);
+        incompleteT.setAdapter(ia);
     }
 
     @Override
@@ -91,4 +139,29 @@ public class IncompleteFragment extends Fragment {
     }
 
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.allFilter:
+                searchTask.setQuery("",false);
+                searchTask.clearFocus();
+                TaskAdapter ia = new TaskAdapter(getContext(), incompleteTaskModels);
+                incompleteT.setAdapter(ia);
+                break;
+            case R.id.workFilter:
+                filterList("work");
+                break;
+            case R.id.shoppingFilter:
+                filterList("shopping");
+                break;
+            case R.id.schoolFilter:
+                filterList("school");
+                break;
+            case R.id.groceriesFilter:
+                filterList("groceries");
+                 break;
+            default:
+                break;
+        }
+    }
 }

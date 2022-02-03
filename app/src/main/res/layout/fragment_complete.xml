@@ -12,11 +12,72 @@
         android:iconifiedByDefault="false"
         android:queryHint="Complete Task Name"></SearchView>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:orientation="horizontal"
+        android:translationY="40dp">
+
+        <Button
+            android:id="@+id/allFilter"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="#03A9F4"
+            android:textColor="#FFFFFF"
+            android:onClick="allFilterTapped"
+            android:text="All" />
+
+        <Button
+            android:id="@+id/workFilter"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="#03A9F4"
+            android:textColor="#FFFFFF"
+            android:onClick="workFilterTapped"
+            android:textSize="11sp"
+            android:text="Work" />
+
+        <Button
+            android:id="@+id/schoolFilter"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="#03A9F4"
+            android:textColor="#FFFFFF"
+            android:onClick="schoolFilterTapped"
+            android:textSize="11sp"
+            android:text="School" />
+
+        <Button
+            android:id="@+id/shoppingFilter"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="#03A9F4"
+            android:textColor="#FFFFFF"
+            android:onClick="shoppingFilterTapped"
+            android:textSize="11sp"
+            android:text="Shopping" />
+
+        <Button
+            android:id="@+id/groceriesFilter"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="#03A9F4"
+            android:onClick="groceriesFilterTapped"
+            android:text="Groceries"
+            android:textColor="#FFFFFF"
+            android:textSize="11sp" />
+
+    </LinearLayout>
+
     <ListView
         android:id="@+id/completeTasks"
         android:layout_width="match_parent"
-        android:layout_height="691dp"
-        android:translationY="40dp"
-        />
+        android:layout_height="661dp"
+        android:translationY="70dp" />
 
 </FrameLayout>

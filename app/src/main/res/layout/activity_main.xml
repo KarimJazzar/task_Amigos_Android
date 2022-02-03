@@ -24,7 +24,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add a New Task"
-        android:translationX="245dp"
+        android:backgroundTint="#03A9F4"
+        android:textColor="#FFFFFF"
+        android:translationX="265dp"
         android:translationY="550dp" />
 
 
