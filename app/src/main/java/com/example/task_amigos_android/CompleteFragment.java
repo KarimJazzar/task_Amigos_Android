@@ -1,7 +1,6 @@
 package com.example.task_amigos_android;
 
 import static com.example.task_amigos_android.MainActivity.completeTaskModels;
-import static com.example.task_amigos_android.MainActivity.incompleteTaskModels;
 
 import android.os.Bundle;
 
@@ -11,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 
@@ -21,7 +21,7 @@ import java.util.ArrayList;
  * Use the {@link CompleteFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CompleteFragment extends Fragment {
+public class CompleteFragment extends Fragment implements View.OnClickListener{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -56,6 +56,9 @@ public class CompleteFragment extends Fragment {
 
     ListView completeT;
     SearchView searchTask;
+    Button all,work,school,shopping,groceries;
+    private String selectedFilter = "all";
+    private String currentFilterText = "";
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -74,6 +77,7 @@ public class CompleteFragment extends Fragment {
             @Override
             public boolean onQueryTextChange(String newText) {
                 ArrayList<TaskModel> searchedTasks = new ArrayList<TaskModel>();
+                currentFilterText = newText;
 
                 for(TaskModel task: completeTaskModels){
                     if(task.getName().toLowerCase().contains(newText.toLowerCase())){
@@ -86,6 +90,18 @@ public class CompleteFragment extends Fragment {
                 return false;
             }
         });
+
+        all = (Button) view.findViewById(R.id.allFilter);
+        work = (Button) view.findViewById(R.id.workFilter);
+        school = (Button) view.findViewById(R.id.schoolFilter);
+        shopping = (Button) view.findViewById(R.id.shoppingFilter);
+        groceries = (Button) view.findViewById(R.id.groceriesFilter);
+
+        all.setOnClickListener(this);
+        work.setOnClickListener(this);
+        school.setOnClickListener(this);
+        shopping.setOnClickListener(this);
+        groceries.setOnClickListener(this);
     }
 
     @Override
@@ -102,5 +118,61 @@ public class CompleteFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_complete, container, false);
+    }
+
+    private void filterList(String category)
+    {
+        selectedFilter = category;
+
+        ArrayList<TaskModel> filteredTasks = new ArrayList<TaskModel>();
+
+        for(TaskModel task: completeTaskModels)
+        {
+            if(task.getCategory().toLowerCase().contains(category)){
+                if(currentFilterText == "")
+                {
+                    filteredTasks.add(task);
+                }
+                else
+                {
+                    if(task.getName().toLowerCase().contains(currentFilterText.toLowerCase()))
+                    {
+                        filteredTasks.add(task);
+
+                    }
+
+                }
+            }
+
+        }
+
+        TaskAdapter ia = new TaskAdapter(getContext(), filteredTasks);
+        completeT.setAdapter(ia);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.allFilter:
+                searchTask.setQuery("",false);
+                searchTask.clearFocus();
+                TaskAdapter ia = new TaskAdapter(getContext(), completeTaskModels);
+                completeT.setAdapter(ia);
+                break;
+            case R.id.workFilter:
+                filterList("work");
+                break;
+            case R.id.shoppingFilter:
+                filterList("shopping");
+                break;
+            case R.id.schoolFilter:
+                filterList("school");
+                break;
+            case R.id.groceriesFilter:
+                filterList("groceries");
+                break;
+            default:
+                break;
+        }
     }
 }
