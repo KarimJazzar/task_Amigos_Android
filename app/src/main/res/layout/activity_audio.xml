@@ -13,6 +13,7 @@
         android:layout_height="263dp"
         android:layout_marginTop="151dp"
         android:layout_marginBottom="395dp"
+        android:contentDescription="@string/logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
@@ -29,20 +30,20 @@
         android:layout_marginStart="28dp"
         android:layout_marginTop="60dp"
         android:background="#03A9F4"
-        android:text="Record"
+        android:text="@string/record"
         android:textColor="#212121"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <Button
-        android:id="@+id/selectButton"
+        android:id="@+id/chooseButton"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="103dp"
         android:layout_height="48dp"
         android:layout_marginTop="60dp"
         android:layout_marginEnd="32dp"
         android:background="#03A9F4"
-        android:text="Choose Audio"
+        android:text="@string/choose"
         android:textColor="#212121"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
@@ -55,7 +56,7 @@
         android:layout_marginStart="28dp"
         android:layout_marginBottom="17dp"
         android:background="#F44336"
-        android:text="Delete"
+        android:text="@string/delete"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -68,7 +69,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="17dp"
         android:background="#00BCD4"
-        android:text="Save"
+        android:text="@string/save"
         android:textColor="#283593"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -84,12 +85,13 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/playButton"
         android:layout_width="59dp"
         android:layout_height="55dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="68dp"
         android:background="@color/grey_e35"
+        android:contentDescription="@string/play"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recordButton"
         app:srcCompat="@android:drawable/ic_media_play"
