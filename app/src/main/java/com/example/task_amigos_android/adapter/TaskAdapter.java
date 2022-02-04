@@ -1,23 +1,31 @@
-package com.example.task_amigos_android;
+package com.example.task_amigos_android.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.task_amigos_android.R;
+import com.example.task_amigos_android.model.TaskModel;
+import com.example.task_amigos_android.ui.AddEditTaskActivity;
+
 import java.util.ArrayList;
 
 public class TaskAdapter extends BaseAdapter {
     ArrayList<TaskModel> data=new ArrayList<>();
     LayoutInflater inflater;//
+    Activity activity;
 
     //constructor
-    public TaskAdapter(Context context, ArrayList<TaskModel>data)
+    public TaskAdapter(Context context, ArrayList<TaskModel>data,Activity a)
     {
         this.data=data;
         inflater=LayoutInflater.from(context);
+        activity = a;
     }
     @Override
     public int getCount() {
@@ -52,6 +60,12 @@ public class TaskAdapter extends BaseAdapter {
         holder.name.setText(data.get(i).getName());
         holder.category.setText(data.get(i).getCategory());
         holder.dueDate.setText(data.get(i).getDueDate().toString());
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                activity.startActivity(new Intent(activity, AddEditTaskActivity.class));            }
+        });
         return view;
     }
     static class ViewHolder{

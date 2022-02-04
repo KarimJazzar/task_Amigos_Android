@@ -1,4 +1,4 @@
-package com.example.task_amigos_android;
+package com.example.task_amigos_android.model;
 
 import java.util.ArrayList;
 import java.util.Date;

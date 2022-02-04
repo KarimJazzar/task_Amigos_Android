@@ -1,4 +1,4 @@
-package com.example.task_amigos_android;
+package com.example.task_amigos_android.ui;
 
 import android.os.Bundle;
 
@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.task_amigos_android.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link SubTaskFragment#newInstance} factory method to
+ * Use the {@link InfoFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SubTaskFragment extends Fragment {
+public class InfoFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +26,7 @@ public class SubTaskFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public SubTaskFragment() {
+    public InfoFragment() {
         // Required empty public constructor
     }
 
@@ -34,11 +36,11 @@ public class SubTaskFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment SubTaskFragment.
+     * @return A new instance of fragment InfoFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SubTaskFragment newInstance(String param1, String param2) {
-        SubTaskFragment fragment = new SubTaskFragment();
+    public static InfoFragment newInstance(String param1, String param2) {
+        InfoFragment fragment = new InfoFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,6 +61,6 @@ public class SubTaskFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sub_task, container, false);
+        return inflater.inflate(R.layout.fragment_info, container, false);
     }
 }

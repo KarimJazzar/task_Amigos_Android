@@ -1,4 +1,4 @@
-package com.example.task_amigos_android;
+package com.example.task_amigos_android.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.task_amigos_android.adapter.FragmentAdapter;
+import com.example.task_amigos_android.R;
+import com.example.task_amigos_android.model.TaskModel;
 import com.google.android.material.tabs.TabLayout;
 
 import java.text.ParseException;

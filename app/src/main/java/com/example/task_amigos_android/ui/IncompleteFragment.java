@@ -1,6 +1,6 @@
-package com.example.task_amigos_android;
+package com.example.task_amigos_android.ui;
 
-import static com.example.task_amigos_android.MainActivity.incompleteTaskModels;
+import static com.example.task_amigos_android.ui.MainActivity.incompleteTaskModels;
 
 import android.os.Bundle;
 
@@ -14,8 +14,11 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 
+import com.example.task_amigos_android.R;
+import com.example.task_amigos_android.adapter.TaskAdapter;
+import com.example.task_amigos_android.model.TaskModel;
+
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class IncompleteFragment extends Fragment implements View.OnClickListener{
 
@@ -50,7 +53,7 @@ public class IncompleteFragment extends Fragment implements View.OnClickListener
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         incompleteT = (ListView) view.findViewById(R.id.incompleteTasks);
-        TaskAdapter ia = new TaskAdapter(getContext(), incompleteTaskModels);
+        TaskAdapter ia = new TaskAdapter(getContext(), incompleteTaskModels,getActivity());
         ia.notifyDataSetChanged();
         incompleteT.setAdapter(ia);
 
@@ -71,7 +74,7 @@ public class IncompleteFragment extends Fragment implements View.OnClickListener
                         searchedTasks.add(task);
                     }
                 }
-                TaskAdapter ia = new TaskAdapter(getContext(), searchedTasks);
+                TaskAdapter ia = new TaskAdapter(getContext(), searchedTasks,getActivity());
                 incompleteT.setAdapter(ia);
 
                 return false;
@@ -118,7 +121,7 @@ public class IncompleteFragment extends Fragment implements View.OnClickListener
 
         }
 
-        TaskAdapter ia = new TaskAdapter(getContext(), filteredTasks);
+        TaskAdapter ia = new TaskAdapter(getContext(), filteredTasks,getActivity());
         incompleteT.setAdapter(ia);
     }
 
@@ -145,7 +148,7 @@ public class IncompleteFragment extends Fragment implements View.OnClickListener
             case R.id.allFilter:
                 searchTask.setQuery("",false);
                 searchTask.clearFocus();
-                TaskAdapter ia = new TaskAdapter(getContext(), incompleteTaskModels);
+                TaskAdapter ia = new TaskAdapter(getContext(), incompleteTaskModels,getActivity());
                 incompleteT.setAdapter(ia);
                 break;
             case R.id.workFilter:
