@@ -10,11 +10,7 @@ import android.view.ViewGroup;
 
 import com.example.task_amigos_android.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link InfoFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class InfoFragment extends Fragment {
 
 
@@ -30,6 +26,7 @@ public class InfoFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
+        getActivity().setTitle("Add Task");
 
         return inflater.inflate(R.layout.fragment_info, container, false);
     }
