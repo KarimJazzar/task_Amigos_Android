@@ -2,4 +2,12 @@
     <string name="app_name">task_Amigos_Android</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="logo">Logo</string>
+    <string name="record">Record</string>
+    <string name="choose">Choose Audio</string>
+    <string name="play">Play</string>
+    <string name="delete">Delete</string>
+    <string name="save">Save</string>
+
 </resources>
