@@ -9,7 +9,9 @@ import com.example.task_amigos_android.dao.TaskDao;
 import com.example.task_amigos_android.entities.Category;
 import com.example.task_amigos_android.entities.Subtask;
 import com.example.task_amigos_android.entities.Task;
+import com.example.task_amigos_android.helpers.Converter;
 
+@TypeConverters({Converter.class})
 @Database(entities = {Task.class, Category.class, Subtask.class}, version = 2)
 public abstract class AppDatabase extends RoomDatabase {
 
