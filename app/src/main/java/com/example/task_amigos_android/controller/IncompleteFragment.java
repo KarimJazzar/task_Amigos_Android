@@ -1,6 +1,6 @@
-package com.example.task_amigos_android.ui;
+package com.example.task_amigos_android.controller;
 
-import static com.example.task_amigos_android.ui.MainActivity.incompleteTaskModels;
+import static com.example.task_amigos_android.controller.MainActivity.incompleteTaskModels;
 
 import android.os.Bundle;
 

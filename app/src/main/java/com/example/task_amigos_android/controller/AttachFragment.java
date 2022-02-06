@@ -1,4 +1,4 @@
-package com.example.task_amigos_android.ui;
+package com.example.task_amigos_android.controller;
 
 import android.os.Bundle;
 

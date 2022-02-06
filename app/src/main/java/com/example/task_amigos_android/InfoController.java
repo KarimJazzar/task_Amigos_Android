@@ -3,9 +3,6 @@ package com.example.task_amigos_android;// Created by FebinRukfan on 05-02-2022.
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.widget.DatePicker;
-
-import com.example.task_amigos_android.databinding.FragmentInfoBinding;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
