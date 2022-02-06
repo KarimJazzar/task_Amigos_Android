@@ -11,7 +11,7 @@ import java.util.Calendar;
 
 public class InfoController {
 
-    private int mYear, mMonth, mDay, mHour, mMinute;
+    private int mYear, mMonth, mDay;
     FragmentInfoBinding fragmentInfoBinding;
     Context context;
 
