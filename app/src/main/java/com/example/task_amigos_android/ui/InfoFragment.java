@@ -12,17 +12,24 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.task_amigos_android.InfoController;
 import com.example.task_amigos_android.R;
+import com.example.task_amigos_android.databinding.FragmentInfoBinding;
+import com.example.task_amigos_android.helpers.DateHelper;
 
 
 public class InfoFragment extends Fragment {
 
 
     public String TAG = this.getClass().getName();
+    private FragmentInfoBinding binding;
+    DateHelper dateHelper;
+    InfoController infoController;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
     }
 
@@ -32,11 +39,30 @@ public class InfoFragment extends Fragment {
         // Inflate the layout for this fragment
 
         getActivity().setTitle("Add Task");
+        dateHelper = new DateHelper();
+        infoController = new InfoController();
 
 
-        return inflater.inflate(R.layout.fragment_info, container, false);
+        binding = FragmentInfoBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
+
+        binding.txtCreationDate.setText(dateHelper.todaysDate());
+        binding.txtDuedate.setText(dateHelper.todaysDate());
+        binding.txtDuedate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                infoController.selectDate(binding,getContext());
+            }
+        });
+        return view;
+
     }
 
-
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
 
 }
