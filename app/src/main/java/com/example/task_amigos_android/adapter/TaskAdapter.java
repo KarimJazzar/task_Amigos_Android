@@ -64,7 +64,8 @@ public class TaskAdapter extends BaseAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                activity.startActivity(new Intent(activity, AddEditTaskActivity.class));            }
+                activity.startActivity(new Intent(activity, AddEditTaskActivity.class));
+            }
         });
         return view;
     }

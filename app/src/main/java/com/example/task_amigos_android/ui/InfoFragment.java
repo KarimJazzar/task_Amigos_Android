@@ -1,10 +1,14 @@
 package com.example.task_amigos_android.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -14,6 +18,7 @@ import com.example.task_amigos_android.R;
 public class InfoFragment extends Fragment {
 
 
+    public String TAG = this.getClass().getName();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,6 +33,10 @@ public class InfoFragment extends Fragment {
 
         getActivity().setTitle("Add Task");
 
+
         return inflater.inflate(R.layout.fragment_info, container, false);
     }
+
+
+
 }

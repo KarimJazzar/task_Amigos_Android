@@ -7,6 +7,8 @@
     android:background="@color/grey_e35"
     tools:context=".ui.AddEditTaskActivity">
 
+
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
         android:layout_width="0dp"
