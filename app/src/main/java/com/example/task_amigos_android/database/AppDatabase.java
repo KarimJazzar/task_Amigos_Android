@@ -15,10 +15,10 @@ import com.example.task_amigos_android.entities.Task;
 import com.example.task_amigos_android.helpers.Converter;
 
 @TypeConverters({Converter.class})
-@Database(entities = {Task.class, Category.class, Subtask.class}, version = 2)
+@Database(entities = {Task.class, Category.class, Subtask.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
 
-    private static String DB_NAME = "amigos";
+    private static final String DB_NAME = "amigos";
     private static AppDatabase INSTANCE = null;
 
     public abstract TaskDao taskDao();

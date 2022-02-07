@@ -54,9 +54,10 @@ public class MainActivity extends AppCompatActivity {
         loadCategory();
         loadTask();
 
-        /*
         incompleteTaskModels = new ArrayList<>();
         completeTaskModels = new ArrayList<>();
+
+        /*
         incompleteTaskModels.add(new TaskModel(1,"Incomplete 1","first incomplete task","Work",false, new ArrayList<>(),new ArrayList<>(),new ArrayList<>(), parseDate("2014-02-14"),parseDate("2014-02-14"),false));
         incompleteTaskModels.add(new TaskModel(2,"Incomplete 2","second incomplete task","School",false, new ArrayList<>(),new ArrayList<>(),new ArrayList<>(), parseDate("2014-02-14"),parseDate("2014-02-14"),false));
         incompleteTaskModels.add(new TaskModel(1,"Incomplete 3","first incomplete task","School",false, new ArrayList<>(),new ArrayList<>(),new ArrayList<>(), parseDate("2014-02-14"),parseDate("2014-02-14"),false));
