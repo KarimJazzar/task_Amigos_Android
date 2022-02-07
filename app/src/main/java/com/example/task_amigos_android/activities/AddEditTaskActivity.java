@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.example.task_amigos_android.R;
 import com.example.task_amigos_android.adapter.AddEditFrgAdapter;
+import com.example.task_amigos_android.databinding.ActivityAddEditTaskBinding;
 import com.google.android.material.tabs.TabLayout;
 
 public class AddEditTaskActivity extends AppCompatActivity {

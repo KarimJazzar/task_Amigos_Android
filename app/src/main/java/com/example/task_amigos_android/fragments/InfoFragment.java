@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
-import com.example.task_amigos_android.InfoController;
+import com.example.task_amigos_android.controller.InfoController;
 import com.example.task_amigos_android.databinding.FragmentInfoBinding;
 import com.example.task_amigos_android.helpers.DateHelper;
 
