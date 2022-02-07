@@ -1,66 +1,111 @@
 package com.example.task_amigos_android.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 
+import com.example.task_amigos_android.InfoController;
 import com.example.task_amigos_android.R;
+import com.example.task_amigos_android.databinding.FragmentInfoBinding;
+import com.example.task_amigos_android.helpers.DateHelper;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link InfoFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class InfoFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    public String TAG = this.getClass().getName();
+    private FragmentInfoBinding binding;
+    DateHelper dateHelper;
+    InfoController infoController;
+    final String[] statusStr = {"Incomplete", "Complete"};
+    final String[] catStr = {"Work", "School", "Shopping", "Work"};
 
-    public InfoFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment InfoFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static InfoFragment newInstance(String param1, String param2) {
-        InfoFragment fragment = new InfoFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_info, container, false);
+
+        getActivity().setTitle("Add Task");
+        dateHelper = new DateHelper();
+        infoController = new InfoController();
+
+
+        binding = FragmentInfoBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
+
+        ArrayAdapter<String> adp1 = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_spinner_item, statusStr);
+        adp1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        binding.statSpinner.setAdapter(adp1);
+        binding.statSpinner.setSelection(0);
+
+        binding.statSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        {
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
+              binding.statSpinner.setSelection(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
+
+     ArrayAdapter<String> adp2 = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_spinner_item, catStr);
+        adp2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        binding.catSpinner.setAdapter(adp2);
+        binding.catSpinner.setSelection(0);
+
+        binding.catSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        {
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
+              binding.catSpinner.setSelection(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
+
+        binding.txtCreationDate.setText(dateHelper.todaysDate());
+        binding.txtDuedate.setText(dateHelper.todaysDate());
+        binding.txtDuedate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                infoController.selectDate(binding,getContext());
+            }
+        });
+        return view;
+
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
+
 }
