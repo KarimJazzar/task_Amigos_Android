@@ -3,16 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/YOU/MADT/T2/MAD 4124/task_Amigos_Android/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
-        <entry key="..\:/YOU/MADT/T2/MAD 4124/task_Amigos_Android/app/src/main/res/layout/activity_add_edit.xml" value="0.556910569105691" />
-        <entry key="..\:/YOU/MADT/T2/MAD 4124/task_Amigos_Android/app/src/main/res/layout/activity_add_edit_task.xml" value="0.1" />
-        <entry key="..\:/YOU/MADT/T2/MAD 4124/task_Amigos_Android/app/src/main/res/layout/activity_main.xml" value="0.15579710144927536" />
-        <entry key="..\:/YOU/MADT/T2/MAD 4124/task_Amigos_Android/app/src/main/res/layout/fragment_add_edit.xml" value="0.1" />
-        <entry key="..\:/YOU/MADT/T2/MAD 4124/task_Amigos_Android/app/src/main/res/layout/fragment_attach.xml" value="0.16757246376811594" />
-        <entry key="..\:/YOU/MADT/T2/MAD 4124/task_Amigos_Android/app/src/main/res/layout/fragment_complete.xml" value="0.15579710144927536" />
-        <entry key="..\:/YOU/MADT/T2/MAD 4124/task_Amigos_Android/app/src/main/res/layout/fragment_incomplete.xml" value="0.15579710144927536" />
-        <entry key="..\:/YOU/MADT/T2/MAD 4124/task_Amigos_Android/app/src/main/res/layout/fragment_info.xml" value="0.1" />
-        <entry key="..\:/YOU/MADT/T2/MAD 4124/task_Amigos_Android/app/src/main/res/layout/fragment_sub_task.xml" value="0.2125" />
+        <entry key="..\:/Users/Karim/AndroidStudioProjects/task_Amigos_Android/app/src/main/res/layout/activity_add_edit_task.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Karim/AndroidStudioProjects/task_Amigos_Android/app/src/main/res/layout/activity_audio.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Karim/AndroidStudioProjects/task_Amigos_Android/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/Karim/AndroidStudioProjects/task_Amigos_Android/app/src/main/res/layout/adapter_view_layout.xml" value="0.1838768115942029" />
+        <entry key="..\:/Users/Karim/AndroidStudioProjects/task_Amigos_Android/app/src/main/res/layout/fragment_attach.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Karim/AndroidStudioProjects/task_Amigos_Android/app/src/main/res/layout/fragment_complete.xml" value="0.1838768115942029" />
+        <entry key="..\:/Users/Karim/AndroidStudioProjects/task_Amigos_Android/app/src/main/res/layout/fragment_incomplete.xml" value="0.33" />
+        <entry key="..\:/Users/Karim/AndroidStudioProjects/task_Amigos_Android/app/src/main/res/layout/task_view_layout.xml" value="0.182518115942029" />
       </map>
     </option>
   </component>
