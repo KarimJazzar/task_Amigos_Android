@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.example.task_amigos_android.TaskFragment;
 import com.example.task_amigos_android.controller.CompleteFragment;
 import com.example.task_amigos_android.controller.IncompleteFragment;
 
@@ -19,7 +20,8 @@ public class FragmentAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
 
         if(position == 0){
-            return new IncompleteFragment();
+            return new TaskFragment();
+            //return new IncompleteFragment();
         }else{
             return new CompleteFragment();
         }
@@ -28,6 +30,6 @@ public class FragmentAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 3;
+        return 2;
     }
 }

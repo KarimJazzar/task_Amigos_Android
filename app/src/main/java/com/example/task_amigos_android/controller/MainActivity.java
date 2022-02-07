@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         */
 
         tabLayout = findViewById(R.id.tab_layout);
-        pager = findViewById(R.id.view_pager2);
+        pager = findViewById(R.id.taskViewPager);
         addT = findViewById(R.id.addTask);
 
         FragmentManager fm = getSupportFragmentManager();
