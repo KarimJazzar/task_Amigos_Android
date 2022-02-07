@@ -12,5 +12,12 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="colorAccent">@color/grey_e35</item>
+        <item name="colorControlActivated">#1E88E5</item>
+        <item name="android:selectableItemBackgroundBorderless">@color/white</item>
+        <item name="colorControlHighlight">#d50000</item>
+    </style>
+    <style name="SpinnerTheme" parent="android:Widget.Spinner.DropDown">
+        <item name="android:background">@drawable/sp_style</item>
     </style>
 </resources>
