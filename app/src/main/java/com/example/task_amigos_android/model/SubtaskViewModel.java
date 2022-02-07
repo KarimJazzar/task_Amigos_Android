@@ -5,11 +5,8 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-
 import com.example.task_amigos_android.entities.Subtask;
-import com.example.task_amigos_android.entities.Task;
 import com.example.task_amigos_android.repositories.SubtaskRepository;
-import com.example.task_amigos_android.repositories.TaskRepository;
 
 import java.util.List;
 
