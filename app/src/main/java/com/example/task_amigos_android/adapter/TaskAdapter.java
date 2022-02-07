@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.example.task_amigos_android.R;
 import com.example.task_amigos_android.model.TaskModel;
-import com.example.task_amigos_android.controller.AddEditTaskActivity;
+import com.example.task_amigos_android.activities.AddEditTaskActivity;
 
 import java.util.ArrayList;
 

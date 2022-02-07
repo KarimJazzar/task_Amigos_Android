@@ -1,4 +1,4 @@
-package com.example.task_amigos_android.controller;
+package com.example.task_amigos_android.fragments;
 
 import android.os.Bundle;
 

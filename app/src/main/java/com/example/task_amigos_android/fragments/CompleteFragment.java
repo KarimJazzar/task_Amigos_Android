@@ -1,6 +1,6 @@
-package com.example.task_amigos_android.controller;
+package com.example.task_amigos_android.fragments;
 
-import static com.example.task_amigos_android.controller.MainActivity.incompleteTaskModels;
+import static com.example.task_amigos_android.activities.MainActivity.completeTaskModels;
 
 import android.os.Bundle;
 
@@ -20,7 +20,12 @@ import com.example.task_amigos_android.model.TaskModel;
 
 import java.util.ArrayList;
 
-public class IncompleteFragment extends Fragment implements View.OnClickListener{
+/**
+ * A simple {@link Fragment} subclass.
+ * Use the {@link CompleteFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class CompleteFragment extends Fragment implements View.OnClickListener{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -31,12 +36,21 @@ public class IncompleteFragment extends Fragment implements View.OnClickListener
     private String mParam1;
     private String mParam2;
 
-    public IncompleteFragment() {
+    public CompleteFragment() {
         // Required empty public constructor
     }
 
-    public static IncompleteFragment newInstance(String param1, String param2) {
-        IncompleteFragment fragment = new IncompleteFragment();
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment CompleteFragment.
+     */
+    // TODO: Rename and change types and number of parameters
+    public static CompleteFragment newInstance(String param1, String param2) {
+        CompleteFragment fragment = new CompleteFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -44,7 +58,7 @@ public class IncompleteFragment extends Fragment implements View.OnClickListener
         return fragment;
     }
 
-    ListView incompleteT;
+    ListView completeT;
     SearchView searchTask;
     Button all,work,school,shopping,groceries;
     private String selectedFilter = "all";
@@ -52,12 +66,12 @@ public class IncompleteFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        incompleteT = (ListView) view.findViewById(R.id.incompleteTasks);
-        TaskAdapter ia = new TaskAdapter(getContext(), incompleteTaskModels,getActivity());
+        completeT = (ListView) view.findViewById(R.id.completeTasks);
+        TaskAdapter ia = new TaskAdapter(getContext(), completeTaskModels,getActivity());
         ia.notifyDataSetChanged();
-        incompleteT.setAdapter(ia);
+        completeT.setAdapter(ia);
 
-        searchTask = (SearchView) view.findViewById(R.id.incompleteListSearchView);
+        searchTask = (SearchView) view.findViewById(R.id.completeListSearchView);
         searchTask.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -69,13 +83,13 @@ public class IncompleteFragment extends Fragment implements View.OnClickListener
                 ArrayList<TaskModel> searchedTasks = new ArrayList<TaskModel>();
                 currentFilterText = newText;
 
-                for(TaskModel task: incompleteTaskModels){
+                for(TaskModel task: completeTaskModels){
                     if(task.getName().toLowerCase().contains(newText.toLowerCase())){
                         searchedTasks.add(task);
                     }
                 }
                 TaskAdapter ia = new TaskAdapter(getContext(), searchedTasks,getActivity());
-                incompleteT.setAdapter(ia);
+                completeT.setAdapter(ia);
 
                 return false;
             }
@@ -92,7 +106,22 @@ public class IncompleteFragment extends Fragment implements View.OnClickListener
         school.setOnClickListener(this);
         shopping.setOnClickListener(this);
         groceries.setOnClickListener(this);
+    }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_complete, container, false);
     }
 
     private void filterList(String category)
@@ -101,7 +130,7 @@ public class IncompleteFragment extends Fragment implements View.OnClickListener
 
         ArrayList<TaskModel> filteredTasks = new ArrayList<TaskModel>();
 
-        for(TaskModel task: incompleteTaskModels)
+        for(TaskModel task: completeTaskModels)
         {
             if(task.getCategory().toLowerCase().contains(category)){
                 if(currentFilterText == "")
@@ -122,25 +151,8 @@ public class IncompleteFragment extends Fragment implements View.OnClickListener
         }
 
         TaskAdapter ia = new TaskAdapter(getContext(), filteredTasks,getActivity());
-        incompleteT.setAdapter(ia);
+        completeT.setAdapter(ia);
     }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_incomplete, container, false);
-    }
-
 
     @Override
     public void onClick(View v) {
@@ -148,8 +160,8 @@ public class IncompleteFragment extends Fragment implements View.OnClickListener
             case R.id.allFilter:
                 searchTask.setQuery("",false);
                 searchTask.clearFocus();
-                TaskAdapter ia = new TaskAdapter(getContext(), incompleteTaskModels,getActivity());
-                incompleteT.setAdapter(ia);
+                TaskAdapter ia = new TaskAdapter(getContext(), completeTaskModels,getActivity());
+                completeT.setAdapter(ia);
                 break;
             case R.id.workFilter:
                 filterList("work");
@@ -162,7 +174,7 @@ public class IncompleteFragment extends Fragment implements View.OnClickListener
                 break;
             case R.id.groceriesFilter:
                 filterList("groceries");
-                 break;
+                break;
             default:
                 break;
         }

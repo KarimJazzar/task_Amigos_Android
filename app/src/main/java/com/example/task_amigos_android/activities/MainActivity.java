@@ -1,4 +1,4 @@
-package com.example.task_amigos_android.controller;
+package com.example.task_amigos_android.activities;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;

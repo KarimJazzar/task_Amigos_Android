@@ -6,9 +6,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.task_amigos_android.TaskFragment;
-import com.example.task_amigos_android.controller.CompleteFragment;
-import com.example.task_amigos_android.controller.IncompleteFragment;
+import com.example.task_amigos_android.fragments.TaskFragment;
+import com.example.task_amigos_android.fragments.CompleteFragment;
 
 public class FragmentAdapter extends FragmentStateAdapter {
     public FragmentAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
