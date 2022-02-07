@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface SubtaskDao {
     @Query("SELECT * FROM subtask WHERE task_id IN (:taskId)")
-    LiveData<List<Subtask>> loadAllByIds(int taskId);
+    LiveData<List<Subtask>> getAllRelatedBy(int taskId);
 
     @Insert
     void insert(Subtask subtask);
