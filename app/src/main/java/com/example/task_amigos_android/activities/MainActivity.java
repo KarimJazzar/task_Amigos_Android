@@ -8,6 +8,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
@@ -34,6 +36,10 @@ public class MainActivity extends AppCompatActivity {
     // Entities models
     private TaskViewModel taskVM;
     private CategoryViewModel categoryVM;
+    // Atributes for swipe or drag tracking
+    private float x1, x2;
+    private final float swipeDistance = 150;
+    private int currentPosition = 0;
 
     public static ArrayList<TaskModel> incompleteTaskModels;
     public static ArrayList<TaskModel> completeTaskModels;
@@ -68,6 +74,38 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.tab_layout);
         pager = findViewById(R.id.taskViewPager);
         pager.setUserInputEnabled(false);
+
+        /*
+        pager.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                switch(motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        x1 = motionEvent.getX();
+                        Log.d("DEBUG", "TOUCH DOWN");
+                        break;
+
+                    case MotionEvent.ACTION_MOVE:
+                        x2 = motionEvent.getX();
+                        Log.d("DEBUG", "TOUCH MOVE");
+                        break;
+
+                    case MotionEvent.ACTION_UP:
+                        Log.d("DEBUG", "TOUCH DOWN");
+                        if (Math.abs(x1 - x1) >= swipeDistance) {
+                            if (x1 < x2) {
+                                Log.d("DEBUG", "LEFT SWIPE");
+                            } else {
+                                Log.d("DEBUG", "RIGHT SWIPE");
+                            }
+                        }
+                        break;
+                }
+
+                return true;
+            }
+        });
+        */
         //addT = findViewById(R.id.addTask);
 
         FragmentManager fm = getSupportFragmentManager();
@@ -84,14 +122,10 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
+            public void onTabUnselected(TabLayout.Tab tab) { }
 
             @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
+            public void onTabReselected(TabLayout.Tab tab) { }
         });
 
 
@@ -138,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
                     System.out.println(task.getCreationDate());
                 }
 
-                fragmentAdapter.updateTaskFramentTables(incompleteList, completeList);
+                fragmentAdapter.updateTaskTableList(incompleteList, completeList);
                 // Update recycler view adapters here
                 // (recycler view adapter).submitList(incompleteList);
                 // (recycler view adapter).submitList(completeList);
@@ -161,5 +195,48 @@ public class MainActivity extends AppCompatActivity {
         } catch (ParseException e) {
             return null;
         }
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        View v = getCurrentFocus();
+
+        switch(event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                x1 = event.getX();
+                Log.d("DEBUG", "TOUCH DOWN");
+                break;
+
+            case MotionEvent.ACTION_MOVE:
+                x2 = event.getX();
+                Log.d("DEBUG", "TOUCH MOVE");
+                break;
+
+            case MotionEvent.ACTION_UP:
+                Log.d("DEBUG", "TOUCH UP");
+                if (Math.abs(x1 - x2) >= swipeDistance) {
+                    if (x1 < x2) {
+                        Log.d("DEBUG", "LEFT SWIPE");
+                        currentPosition--;
+                    } else {
+                        Log.d("DEBUG", "RIGHT SWIPE");
+                        currentPosition++;
+                    }
+
+                    currentPosition = currentPosition < 0 ? 0 : currentPosition;
+                    currentPosition = currentPosition > 2 ? 2 : currentPosition;
+
+                    if (currentPosition == 2) {
+                        pager.setCurrentItem(1);
+                    } else {
+                        pager.setCurrentItem(0);
+                        fragmentAdapter.updateTaskTablePosition(currentPosition);
+                    }
+                }
+                break;
+        }
+
+        boolean ret = super.dispatchTouchEvent(event);
+        return ret;
     }
 }

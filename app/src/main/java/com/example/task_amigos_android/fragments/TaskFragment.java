@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationSet;
@@ -17,6 +19,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
 
 import com.example.task_amigos_android.R;
+import com.example.task_amigos_android.activities.MainActivity;
 import com.example.task_amigos_android.adapter.TaskRVAdapter;
 import com.example.task_amigos_android.entities.Task;
 
@@ -56,7 +59,7 @@ public class TaskFragment extends Fragment {
         completeAdapter.submitList(completeTask);
     }
 
-    public void updateColPosition() {
+    public void updateColPosition(int position) {
 
     }
 
@@ -106,8 +109,7 @@ public class TaskFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_task, container, false);
     }

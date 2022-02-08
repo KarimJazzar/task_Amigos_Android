@@ -19,8 +19,12 @@ public class FragmentAdapter extends FragmentStateAdapter {
         super(fragmentManager, lifecycle);
     }
 
-    public void updateTaskFramentTables(List<Task> incompleteTask, List<Task> completeTask) {
+    public void updateTaskTableList(List<Task> incompleteTask, List<Task> completeTask) {
         taskFragment.updateAdaptersList(incompleteTask, completeTask);
+    }
+
+    public void updateTaskTablePosition(int position) {
+        taskFragment.updateColPosition(position);
     }
 
     @NonNull
