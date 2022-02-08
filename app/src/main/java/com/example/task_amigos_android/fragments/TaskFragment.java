@@ -1,14 +1,28 @@
 package com.example.task_amigos_android.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationSet;
+import android.view.animation.TranslateAnimation;
+import android.widget.FrameLayout;
 
 import com.example.task_amigos_android.R;
+import com.example.task_amigos_android.adapter.TaskRVAdapter;
+import com.example.task_amigos_android.entities.Task;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +30,13 @@ import com.example.task_amigos_android.R;
  * create an instance of this fragment.
  */
 public class TaskFragment extends Fragment {
+
+    private FrameLayout completeCol;
+    private FrameLayout incompleteCol;
+    private RecyclerView completeRV;
+    private RecyclerView incompleteRV;
+    private TaskRVAdapter completeAdapter = new TaskRVAdapter();
+    private TaskRVAdapter incompleteAdapter = new TaskRVAdapter();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,6 +49,15 @@ public class TaskFragment extends Fragment {
 
     public TaskFragment() {
         // Required empty public constructor
+    }
+
+    public void updateAdaptersList(List<Task> incompleteTask, List<Task> completeTask) {
+        incompleteAdapter.submitList(incompleteTask);
+        completeAdapter.submitList(completeTask);
+    }
+
+    public void updateColPosition() {
+
     }
 
     /**
@@ -46,6 +76,24 @@ public class TaskFragment extends Fragment {
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        Context context = getActivity().getApplicationContext();
+
+        completeCol = (FrameLayout) view.findViewById(R.id.completeCol);
+        incompleteCol = (FrameLayout) view.findViewById(R.id.incompleteCol);
+
+        completeRV = (RecyclerView) view.findViewById(R.id.completeRV);
+        completeRV.setLayoutManager(new LinearLayoutManager(context));
+        completeRV.setHasFixedSize(true);
+        completeRV.setAdapter(completeAdapter);
+
+        incompleteRV = (RecyclerView) view.findViewById(R.id.incompleteRV);
+        incompleteRV.setLayoutManager(new LinearLayoutManager(context));
+        incompleteRV.setHasFixedSize(true);
+        incompleteRV.setAdapter(incompleteAdapter);
     }
 
     @Override

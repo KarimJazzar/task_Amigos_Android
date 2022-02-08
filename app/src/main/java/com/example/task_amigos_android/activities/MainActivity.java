@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
 
     TabLayout tabLayout;
     ViewPager2 pager;
-    FragmentAdapter adapter;
     Button addT;
+    FragmentAdapter fragmentAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +50,6 @@ public class MainActivity extends AppCompatActivity {
 
         taskVM = new ViewModelProvider(this).get(TaskViewModel.class);
         categoryVM = new ViewModelProvider(this).get(CategoryViewModel.class);
-
-        loadCategory();
-        loadTask();
 
         incompleteTaskModels = new ArrayList<>();
         completeTaskModels = new ArrayList<>();
@@ -70,14 +67,15 @@ public class MainActivity extends AppCompatActivity {
 
         tabLayout = findViewById(R.id.tab_layout);
         pager = findViewById(R.id.taskViewPager);
-        addT = findViewById(R.id.addTask);
+        pager.setUserInputEnabled(false);
+        //addT = findViewById(R.id.addTask);
 
         FragmentManager fm = getSupportFragmentManager();
-        adapter = new FragmentAdapter(fm, getLifecycle());
-        pager.setAdapter(adapter);
+        fragmentAdapter = new FragmentAdapter(fm, getLifecycle());
+        pager.setAdapter(fragmentAdapter);
 
-        tabLayout.addTab(tabLayout.newTab().setText("Incomplete Tasks"));
-        tabLayout.addTab(tabLayout.newTab().setText("Complete Tasks"));
+        tabLayout.addTab(tabLayout.newTab().setText("Tasks"));
+        tabLayout.addTab(tabLayout.newTab().setText("Categories"));
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -104,12 +102,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /*
         addT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
             }
         });
+        */
+
+        loadCategory();
+        loadTask();
     }
 
     private void loadTask() {
@@ -135,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
                     System.out.println(task.getCreationDate());
                 }
 
+                fragmentAdapter.updateTaskFramentTables(incompleteList, completeList);
                 // Update recycler view adapters here
                 // (recycler view adapter).submitList(incompleteList);
                 // (recycler view adapter).submitList(completeList);

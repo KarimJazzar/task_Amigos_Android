@@ -20,7 +20,7 @@ public class TaskRVAdapter extends ListAdapter<Task, TaskRVAdapter.ViewHolder> {
     private OnItemClickListener listener;
 
     // creating a constructor class for our adapter class.
-    TaskRVAdapter() {
+    public TaskRVAdapter() {
         super(DIFF_CALLBACK);
     }
 
