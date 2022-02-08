@@ -1,7 +1,12 @@
 package com.example.task_amigos_android.ui;
 
+import static com.example.task_amigos_android.ui.IncompleteFragment.getCat;
 import static com.example.task_amigos_android.ui.MainActivity.completeTaskModels;
+import static com.example.task_amigos_android.ui.IncompleteFragment.tDesc;
+import static com.example.task_amigos_android.ui.IncompleteFragment.tName;
+import static com.example.task_amigos_android.ui.IncompleteFragment.tCategory;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -10,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -66,6 +72,9 @@ public class CompleteFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        tName = "";
+        tDesc = "";
+
         completeT = (ListView) view.findViewById(R.id.completeTasks);
         TaskAdapter ia = new TaskAdapter(getContext(), completeTaskModels,getActivity());
         ia.notifyDataSetChanged();
@@ -106,6 +115,16 @@ public class CompleteFragment extends Fragment implements View.OnClickListener{
         school.setOnClickListener(this);
         shopping.setOnClickListener(this);
         groceries.setOnClickListener(this);
+
+        completeT.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                tName = completeTaskModels.get(position).getName();
+                tDesc = completeTaskModels.get(position).getDescription();
+                tCategory = getCat(completeTaskModels.get(position).getCategory());
+                startActivity(new Intent(view.getContext(), AddEditTaskActivity.class));
+            }
+        });
     }
 
     @Override

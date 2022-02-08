@@ -1,7 +1,7 @@
 package com.example.task_amigos_android.ui;
-
 import static com.example.task_amigos_android.ui.MainActivity.incompleteTaskModels;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -49,9 +50,16 @@ public class IncompleteFragment extends Fragment implements View.OnClickListener
     Button all,work,school,shopping,groceries;
     private String selectedFilter = "all";
     private String currentFilterText = "";
+    public static String tName,tDesc;
+    public static int tCategory;
+
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        tName = "";
+        tDesc = "";
+        tCategory = 0;
+
         incompleteT = (ListView) view.findViewById(R.id.incompleteTasks);
         TaskAdapter ia = new TaskAdapter(getContext(), incompleteTaskModels,getActivity());
         ia.notifyDataSetChanged();
@@ -93,6 +101,28 @@ public class IncompleteFragment extends Fragment implements View.OnClickListener
         shopping.setOnClickListener(this);
         groceries.setOnClickListener(this);
 
+        incompleteT.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                tName = incompleteTaskModels.get(position).getName();
+                tDesc = incompleteTaskModels.get(position).getDescription();
+                tCategory = getCat(incompleteTaskModels.get(position).getCategory());
+                startActivity(new Intent(view.getContext(), AddEditTaskActivity.class));
+            }
+        });
+
+    }
+
+    public static int getCat(String category){
+        if(category == "Work"){
+            return 0;
+        }else if(category == "School"){
+            return 1;
+        }else if(category == "Shopping"){
+            return 2;
+        }else{
+            return 3;
+        }
     }
 
     private void filterList(String category)

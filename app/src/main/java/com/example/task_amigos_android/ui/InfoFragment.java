@@ -1,5 +1,9 @@
 package com.example.task_amigos_android.ui;
 
+import static com.example.task_amigos_android.ui.IncompleteFragment.tCategory;
+import static com.example.task_amigos_android.ui.IncompleteFragment.tDesc;
+import static com.example.task_amigos_android.ui.IncompleteFragment.tName;
+
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -13,6 +17,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.task_amigos_android.InfoController;
 import com.example.task_amigos_android.R;
@@ -27,8 +33,9 @@ public class InfoFragment extends Fragment {
     private FragmentInfoBinding binding;
     DateHelper dateHelper;
     InfoController infoController;
+    EditText taskName,taskDesc;
     final String[] statusStr = {"Incomplete", "Complete"};
-    final String[] catStr = {"Work", "School", "Shopping", "Work"};
+    final String[] catStr = {"Work", "School", "Shopping", "Groceries"};
 
 
     @Override
@@ -98,6 +105,15 @@ public class InfoFragment extends Fragment {
                 infoController.selectDate(binding,getContext());
             }
         });
+
+        taskName = view.findViewById(R.id.edtName);
+        taskDesc = view.findViewById(R.id.edtDesc);
+
+        if(tName != ""){
+            taskName.setText(tName);
+            taskDesc.setText(tDesc);
+            binding.catSpinner.setSelection(tCategory);
+        }
         return view;
 
     }
