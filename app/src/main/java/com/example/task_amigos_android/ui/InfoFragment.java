@@ -1,8 +1,10 @@
 package com.example.task_amigos_android.ui;
 
-import static com.example.task_amigos_android.ui.IncompleteFragment.tCategory;
-import static com.example.task_amigos_android.ui.IncompleteFragment.tDesc;
-import static com.example.task_amigos_android.ui.IncompleteFragment.tName;
+import static com.example.task_amigos_android.ui.MainActivity.tCategory;
+import static com.example.task_amigos_android.ui.MainActivity.tDesc;
+import static com.example.task_amigos_android.ui.MainActivity.tName;
+import static com.example.task_amigos_android.ui.MainActivity.stat;
+
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -113,7 +115,13 @@ public class InfoFragment extends Fragment {
             taskName.setText(tName);
             taskDesc.setText(tDesc);
             binding.catSpinner.setSelection(tCategory);
+            if(stat == false){
+                binding.statSpinner.setSelection(0);
+            }else{
+                binding.statSpinner.setSelection(1);
+            }
         }
+
         return view;
 
     }

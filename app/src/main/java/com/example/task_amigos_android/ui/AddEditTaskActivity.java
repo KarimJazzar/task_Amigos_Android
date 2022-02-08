@@ -68,6 +68,11 @@ public class AddEditTaskActivity extends AppCompatActivity {
             }
         });
 
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            boolean value = extras.getBoolean("currentStatus");
+        }
+
     }
 
     public boolean onOptionsItemSelected(MenuItem item){

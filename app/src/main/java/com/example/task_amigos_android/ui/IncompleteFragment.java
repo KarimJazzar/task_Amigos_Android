@@ -1,5 +1,9 @@
 package com.example.task_amigos_android.ui;
 import static com.example.task_amigos_android.ui.MainActivity.incompleteTaskModels;
+import static com.example.task_amigos_android.ui.MainActivity.stat;
+import static com.example.task_amigos_android.ui.MainActivity.tCategory;
+import static com.example.task_amigos_android.ui.MainActivity.tDesc;
+import static com.example.task_amigos_android.ui.MainActivity.tName;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -50,8 +54,6 @@ public class IncompleteFragment extends Fragment implements View.OnClickListener
     Button all,work,school,shopping,groceries;
     private String selectedFilter = "all";
     private String currentFilterText = "";
-    public static String tName,tDesc;
-    public static int tCategory;
 
 
     @Override
@@ -107,7 +109,11 @@ public class IncompleteFragment extends Fragment implements View.OnClickListener
                 tName = incompleteTaskModels.get(position).getName();
                 tDesc = incompleteTaskModels.get(position).getDescription();
                 tCategory = getCat(incompleteTaskModels.get(position).getCategory());
-                startActivity(new Intent(view.getContext(), AddEditTaskActivity.class));
+
+                Intent intent = new Intent(view.getContext(), AddEditTaskActivity.class);
+                stat = false;
+                //intent.putExtra("currentStatus", stat);
+                startActivity(intent);
             }
         });
 

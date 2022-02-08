@@ -2,9 +2,10 @@ package com.example.task_amigos_android.ui;
 
 import static com.example.task_amigos_android.ui.IncompleteFragment.getCat;
 import static com.example.task_amigos_android.ui.MainActivity.completeTaskModels;
-import static com.example.task_amigos_android.ui.IncompleteFragment.tDesc;
-import static com.example.task_amigos_android.ui.IncompleteFragment.tName;
-import static com.example.task_amigos_android.ui.IncompleteFragment.tCategory;
+import static com.example.task_amigos_android.ui.MainActivity.tDesc;
+import static com.example.task_amigos_android.ui.MainActivity.tName;
+import static com.example.task_amigos_android.ui.MainActivity.tCategory;
+import static com.example.task_amigos_android.ui.MainActivity.stat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -122,6 +123,7 @@ public class CompleteFragment extends Fragment implements View.OnClickListener{
                 tName = completeTaskModels.get(position).getName();
                 tDesc = completeTaskModels.get(position).getDescription();
                 tCategory = getCat(completeTaskModels.get(position).getCategory());
+                stat = true;
                 startActivity(new Intent(view.getContext(), AddEditTaskActivity.class));
             }
         });

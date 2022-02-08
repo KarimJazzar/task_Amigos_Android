@@ -23,6 +23,9 @@ public class MainActivity extends AppCompatActivity {
 
     public static ArrayList<TaskModel> incompleteTaskModels;
     public static ArrayList<TaskModel> completeTaskModels;
+    public static boolean stat;
+    public static String tName,tDesc;
+    public static int tCategory;
 
     TabLayout tabLayout;
     ViewPager2 pager;
