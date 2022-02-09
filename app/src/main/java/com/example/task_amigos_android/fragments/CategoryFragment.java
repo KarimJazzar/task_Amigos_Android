@@ -1,14 +1,22 @@
 package com.example.task_amigos_android.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.task_amigos_android.R;
+import com.example.task_amigos_android.adapter.CategoryRVAdapter;
+import com.example.task_amigos_android.entities.Category;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +24,9 @@ import com.example.task_amigos_android.R;
  * create an instance of this fragment.
  */
 public class CategoryFragment extends Fragment {
+
+    private RecyclerView categoryRV;
+    private CategoryRVAdapter categoryAdapter = new CategoryRVAdapter();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,6 +39,10 @@ public class CategoryFragment extends Fragment {
 
     public CategoryFragment() {
         // Required empty public constructor
+    }
+
+    public void updateAdapterList(List<Category> categories) {
+        categoryAdapter.submitList(categories);
     }
 
     /**
@@ -55,6 +70,16 @@ public class CategoryFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        Context context = getActivity().getApplicationContext();
+
+        categoryRV = (RecyclerView) view.findViewById(R.id.categoryRV);
+        categoryRV.setLayoutManager(new LinearLayoutManager(context));
+        categoryRV.setHasFixedSize(true);
+        categoryRV.setAdapter(categoryAdapter);
     }
 
     @Override

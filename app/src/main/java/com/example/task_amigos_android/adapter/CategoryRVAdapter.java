@@ -1,9 +1,9 @@
 package com.example.task_amigos_android.adapter;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -11,69 +11,66 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.task_amigos_android.R;
-import com.example.task_amigos_android.entities.Task;
+import com.example.task_amigos_android.entities.Category;
 
-public class TaskRVAdapter extends ListAdapter<Task, TaskRVAdapter.ViewHolder> {
+public class CategoryRVAdapter extends ListAdapter<Category, CategoryRVAdapter.ViewHolder> {
     // creating a variable for on item click listener.
-    private OnItemClickListener listener;
+    private CategoryRVAdapter.OnItemClickListener listener;
 
     // creating a constructor class for our adapter class.
-    public TaskRVAdapter() {
+    public CategoryRVAdapter() {
         super(DIFF_CALLBACK);
     }
 
     // creating a call back for item of recycler view.
-    private static final DiffUtil.ItemCallback<Task> DIFF_CALLBACK = new DiffUtil.ItemCallback<Task>() {
+    private static final DiffUtil.ItemCallback<Category> DIFF_CALLBACK = new DiffUtil.ItemCallback<Category>() {
         @Override
-        public boolean areItemsTheSame(Task oldItem, Task newItem) {
+        public boolean areItemsTheSame(Category oldItem, Category newItem) {
             return oldItem.getId() == newItem.getId();
         }
 
         @Override
-        public boolean areContentsTheSame(Task oldItem, Task newItem) {
-            // below line is to check the task title
-            return oldItem.getTitle().equals(newItem.getTitle());
+        public boolean areContentsTheSame(Category oldItem, Category newItem) {
+            // below line is to check the category name
+            return oldItem.getName().equals(newItem.getName());
         }
     };
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CategoryRVAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // below line is use to inflate our layout
         // file for each item of our recycler view.
-        View item = LayoutInflater.from(parent.getContext()).inflate(R.layout.task_rv_item, parent, false);
-        return new ViewHolder(item);
+        View item = LayoutInflater.from(parent.getContext()).inflate(R.layout.category_rv_item, parent, false);
+        return new CategoryRVAdapter.ViewHolder(item);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CategoryRVAdapter.ViewHolder holder, int position) {
         // below line of code is use to set data to
         // each item of our recycler view.
-        Task model = getTaskAt(position);
-        holder.titleTV.setText(model.getTitle());
+        Category model = getCategoryAt(position);
+        holder.nameTV.setText(model.getName());
     }
 
-    // creating a method to get task modal for a specific position.
-    public Task getTaskAt(int position) {
+    // creating a method to get category modal for a specific position.
+    public Category getCategoryAt(int position) {
         return getItem(position);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         // view holder class to create a variable for each view.
-        TextView titleTV;
-        TextView categoryTV;
-        TextView dueDateTV;
+        TextView nameTV;
         FrameLayout colorFL;
+        Button deleteBtn;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             // initializing each view of our recycler view.
-            titleTV = itemView.findViewById(R.id.taskTitle);
-            categoryTV = itemView.findViewById(R.id.taskCategory);
-            dueDateTV = itemView.findViewById(R.id.taskDuedate);
-            colorFL = itemView.findViewById(R.id.taskColor);
+            nameTV = itemView.findViewById(R.id.categoryName);
+            colorFL = itemView.findViewById(R.id.categoryColor);
+            deleteBtn = itemView.findViewById(R.id.deleteCategory);
 
             // adding on click listener for each item of recycler view.
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -91,9 +88,9 @@ public class TaskRVAdapter extends ListAdapter<Task, TaskRVAdapter.ViewHolder> {
     }
 
     public interface OnItemClickListener {
-        void onItemClick(Task model);
+        void onItemClick(Category model);
     }
-    public void setOnItemClickListener(OnItemClickListener listener) {
+    public void setOnItemClickListener(CategoryRVAdapter.OnItemClickListener listener) {
         this.listener = listener;
     }
 }

@@ -41,13 +41,15 @@ public class MainActivity extends AppCompatActivity {
     private final float swipeDistance = 150;
     private int currentPosition = 0;
 
+    // ======================================
+    // We eed to delete this later on
     public static ArrayList<TaskModel> incompleteTaskModels;
     public static ArrayList<TaskModel> completeTaskModels;
+    // ======================================
 
-    TabLayout tabLayout;
-    ViewPager2 pager;
-    Button addT;
-    FragmentAdapter fragmentAdapter;
+    private TabLayout tabLayout;
+    private ViewPager2 pager;
+    private FragmentAdapter fragmentAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,22 +109,9 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         incompleteList.add(task);
                     }
-                    System.out.println("=======================");
-                    System.out.println(task.getId());
-                    System.out.println(task.getTitle());
-                    System.out.println(task.getDescription());
-                    System.out.println(task.getCategory());
-                    System.out.println(task.getImages());
-                    System.out.println(task.getAudios());
-                    System.out.println(task.getStatus());
-                    System.out.println(task.getDueDate());
-                    System.out.println(task.getCreationDate());
                 }
 
                 fragmentAdapter.updateTaskTableList(incompleteList, completeList);
-                // Update recycler view adapters here
-                // (recycler view adapter).submitList(incompleteList);
-                // (recycler view adapter).submitList(completeList);
             }
         });
     }
@@ -132,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<Category> categories) {
                 categoryList = categories;
+                fragmentAdapter.updateCategoryTableList(categories);
             }
         });
     }
