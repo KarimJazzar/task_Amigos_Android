@@ -9,22 +9,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationSet;
 import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
 
 import com.example.task_amigos_android.R;
-import com.example.task_amigos_android.activities.MainActivity;
 import com.example.task_amigos_android.adapter.TaskRVAdapter;
 import com.example.task_amigos_android.entities.Task;
+import com.example.task_amigos_android.helpers.AnimationHelper;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -40,6 +35,8 @@ public class TaskFragment extends Fragment {
     private RecyclerView incompleteRV;
     private TaskRVAdapter completeAdapter = new TaskRVAdapter();
     private TaskRVAdapter incompleteAdapter = new TaskRVAdapter();
+    private int animType = TranslateAnimation.ABSOLUTE;
+    private float colMargin = 0;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -60,7 +57,19 @@ public class TaskFragment extends Fragment {
     }
 
     public void updateColPosition(int position) {
+        colMargin = colMargin == 0 ? incompleteCol.getLeft() : colMargin;
 
+        float leftComplete = 0;
+        float leftIcomplete = 0;
+
+        if(position != 0) {
+            float left = (colMargin * 2) + (completeCol.getWidth() - getView().getWidth());
+            leftComplete = left;
+            leftIcomplete = left;
+        }
+
+        AnimationHelper.animateX(leftComplete, completeCol);
+        AnimationHelper.animateX(leftIcomplete, incompleteCol);
     }
 
     /**

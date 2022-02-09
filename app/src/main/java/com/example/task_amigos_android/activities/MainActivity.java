@@ -204,22 +204,17 @@ public class MainActivity extends AppCompatActivity {
         switch(event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 x1 = event.getX();
-                Log.d("DEBUG", "TOUCH DOWN");
                 break;
 
             case MotionEvent.ACTION_MOVE:
                 x2 = event.getX();
-                Log.d("DEBUG", "TOUCH MOVE");
                 break;
 
             case MotionEvent.ACTION_UP:
-                Log.d("DEBUG", "TOUCH UP");
                 if (Math.abs(x1 - x2) >= swipeDistance) {
                     if (x1 < x2) {
-                        Log.d("DEBUG", "LEFT SWIPE");
                         currentPosition--;
                     } else {
-                        Log.d("DEBUG", "RIGHT SWIPE");
                         currentPosition++;
                     }
 
