@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#171719"
+    tools:context=".fragments.CategoryFragment" >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/categoryNameET"
+            android:layout_width="0dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:background="#fff"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="Name"
+            android:paddingLeft="5dp"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@+id/colorBorder"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <FrameLayout
+            android:id="@+id/colorBorder"
+            android:layout_width="60dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="10dp"
+            android:background="#FFFFFF"
+            android:padding="2dp"
+            app:layout_constraintEnd_toStartOf="@+id/addCategoryBtn"
+            app:layout_constraintStart_toEndOf="@+id/categoryNameET"
+            app:layout_constraintTop_toTopOf="parent" >
+
+            <Button
+                android:id="@+id/selectColorBtn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#03A9F4"
+                android:text="0"
+                android:textColor="#00FFFFFF"
+                android:textSize="12sp" />
+
+        </FrameLayout>
+
+        <Button
+            android:id="@+id/addCategoryBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"
+            android:background="#03A9F4"
+            android:text="Add"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/colorBorder"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="15dp"
+            android:background="#2F2E35"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/categoryNameET" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

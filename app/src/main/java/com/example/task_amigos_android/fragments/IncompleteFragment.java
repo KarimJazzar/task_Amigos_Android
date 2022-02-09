@@ -1,10 +1,6 @@
 package com.example.task_amigos_android.fragments;
 
 import static com.example.task_amigos_android.activities.MainActivity.incompleteTaskModels;
-import static com.example.task_amigos_android.ui.MainActivity.stat;
-import static com.example.task_amigos_android.ui.MainActivity.tCategory;
-import static com.example.task_amigos_android.ui.MainActivity.tDesc;
-import static com.example.task_amigos_android.ui.MainActivity.tName;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -60,9 +56,9 @@ public class IncompleteFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        tName = "";
-        tDesc = "";
-        tCategory = 0;
+        //tName = "";
+        //tDesc = "";
+        //tCategory = 0;
 
         incompleteT = (ListView) view.findViewById(R.id.incompleteTasks);
         TaskAdapter ia = new TaskAdapter(getContext(), incompleteTaskModels,getActivity());
@@ -108,12 +104,12 @@ public class IncompleteFragment extends Fragment implements View.OnClickListener
         incompleteT.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                tName = incompleteTaskModels.get(position).getName();
-                tDesc = incompleteTaskModels.get(position).getDescription();
-                tCategory = getCat(incompleteTaskModels.get(position).getCategory());
+                //tName = incompleteTaskModels.get(position).getName();
+                //tDesc = incompleteTaskModels.get(position).getDescription();
+                //tCategory = getCat(incompleteTaskModels.get(position).getCategory());
 
                 Intent intent = new Intent(view.getContext(), AddEditTaskActivity.class);
-                stat = false;
+                //stat = false;
                 //intent.putExtra("currentStatus", stat);
                 startActivity(intent);
             }

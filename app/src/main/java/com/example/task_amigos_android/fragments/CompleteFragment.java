@@ -1,11 +1,6 @@
 package com.example.task_amigos_android.fragments;
 
 import static com.example.task_amigos_android.activities.MainActivity.completeTaskModels;
-import static com.example.task_amigos_android.ui.MainActivity.tDesc;
-import static com.example.task_amigos_android.ui.MainActivity.tName;
-import static com.example.task_amigos_android.ui.MainActivity.tCategory;
-import static com.example.task_amigos_android.ui.MainActivity.stat;
-
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -73,8 +68,8 @@ public class CompleteFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        tName = "";
-        tDesc = "";
+        //tName = "";
+        //tDesc = "";
 
         completeT = (ListView) view.findViewById(R.id.completeTasks);
         TaskAdapter ia = new TaskAdapter(getContext(), completeTaskModels,getActivity());
@@ -120,10 +115,10 @@ public class CompleteFragment extends Fragment implements View.OnClickListener{
         completeT.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                tName = completeTaskModels.get(position).getName();
-                tDesc = completeTaskModels.get(position).getDescription();
-                tCategory = getCat(completeTaskModels.get(position).getCategory());
-                stat = true;
+                //tName = completeTaskModels.get(position).getName();
+                //tDesc = completeTaskModels.get(position).getDescription();
+                //tCategory = getCat(completeTaskModels.get(position).getCategory());
+                //stat = true;
                 startActivity(new Intent(view.getContext(), AddEditTaskActivity.class));
             }
         });

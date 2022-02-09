@@ -1,11 +1,6 @@
 package com.example.task_amigos_android.fragments;
 
 
-import static com.example.task_amigos_android.ui.MainActivity.tCategory;
-import static com.example.task_amigos_android.ui.MainActivity.tDesc;
-import static com.example.task_amigos_android.ui.MainActivity.tName;
-import static com.example.task_amigos_android.ui.MainActivity.stat;
-
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
@@ -104,6 +99,7 @@ public class InfoFragment extends Fragment {
         //taskName = view.findViewById(R.id.edtName);
         //taskDesc = view.findViewById(R.id.edtDesc);
 
+        /*
         if(tName != ""){
             taskName.setText(tName);
             taskDesc.setText(tDesc);
@@ -114,7 +110,7 @@ public class InfoFragment extends Fragment {
                 binding.statSpinner.setSelection(1);
             }
         }
-
+         */
         return view;
 
     }
