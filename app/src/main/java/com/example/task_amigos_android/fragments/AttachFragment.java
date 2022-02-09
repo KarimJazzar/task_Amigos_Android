@@ -8,8 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.task_amigos_android.AttachController;
-import com.example.task_amigos_android.R;
+import com.example.task_amigos_android.repositories.AttachRespository;
 import com.example.task_amigos_android.databinding.FragmentAttachBinding;
 import com.example.task_amigos_android.helpers.PermissionsHelper;
 
@@ -17,7 +16,8 @@ public class AttachFragment extends Fragment {
 
    FragmentAttachBinding fragmentAttachBinding;
    PermissionsHelper permissionsHelper;
-   AttachController attachController;
+   AttachRespository attachRespository;
+   String TAG = this.getClass().getName();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,7 +31,7 @@ public class AttachFragment extends Fragment {
         View view = fragmentAttachBinding.getRoot();
 
         permissionsHelper = new PermissionsHelper();
-        attachController = new AttachController();
+        attachRespository = new AttachRespository();
 
         permissionsHelper.checkAndRequestPermissions(getActivity());
 
@@ -39,7 +39,7 @@ public class AttachFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if(permissionsHelper.checkAndRequestPermissions(getActivity())){
-                    attachController.chooseImage(getActivity());
+                    attachRespository.chooseImage(getActivity());
                 }
             }
         });
@@ -47,4 +47,6 @@ public class AttachFragment extends Fragment {
 
         return view;
     }
+
+
 }

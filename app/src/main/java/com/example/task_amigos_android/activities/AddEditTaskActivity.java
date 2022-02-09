@@ -1,5 +1,6 @@
 package com.example.task_amigos_android.activities;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.widget.ViewPager2;
@@ -12,6 +13,7 @@ import android.view.View;
 
 import com.example.task_amigos_android.R;
 import com.example.task_amigos_android.adapter.AddEditFrgAdapter;
+import com.example.task_amigos_android.repositories.AttachRespository;
 import com.example.task_amigos_android.databinding.ActivityAddEditTaskBinding;
 import com.google.android.material.tabs.TabLayout;
 
@@ -21,6 +23,7 @@ public class AddEditTaskActivity extends AppCompatActivity {
     AddEditFrgAdapter adapter;
     String TAG = this.getClass().getName();
     private ActivityAddEditTaskBinding binding;
+    AttachRespository attachRespository;
 
 
     @Override
@@ -29,6 +32,8 @@ public class AddEditTaskActivity extends AppCompatActivity {
         binding = ActivityAddEditTaskBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+
+        attachRespository = new AttachRespository();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -87,6 +92,14 @@ public class AddEditTaskActivity extends AppCompatActivity {
 
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode== RESULT_OK){
+            Log.e(TAG,"okaaaaaaaaaaaay");
         }
     }
 }

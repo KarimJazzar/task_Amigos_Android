@@ -1,11 +1,11 @@
-package com.example.task_amigos_android;// Created by FebinRukfan on 06-02-2022.
+package com.example.task_amigos_android.repositories;// Created by FebinRukfan on 06-02-2022.
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 
-public class AttachController {
+public class AttachRespository {
     public void chooseImage(Activity activity){
 
         final CharSequence[] optionsMenu = {"Take Photo", "Choose from Gallery", "Exit" }; // create a menuOption Array
@@ -44,4 +44,10 @@ public class AttachController {
         });
         builder.show();
     }
+
+    public void saveImage(){
+
+    }
+
+
 }

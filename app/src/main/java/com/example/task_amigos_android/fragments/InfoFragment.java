@@ -11,7 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 
-import com.example.task_amigos_android.controller.InfoController;
+import com.example.task_amigos_android.repositories.InfoRepository;
 import com.example.task_amigos_android.databinding.FragmentInfoBinding;
 import com.example.task_amigos_android.helpers.DateHelper;
 
@@ -22,7 +22,7 @@ public class InfoFragment extends Fragment {
     public String TAG = this.getClass().getName();
     private FragmentInfoBinding binding;
     DateHelper dateHelper;
-    InfoController infoController;
+    InfoRepository infoRepository;
     EditText taskName,taskDesc;
     final String[] statusStr = {"Incomplete", "Complete"};
     final String[] catStr = {"Work", "School", "Shopping", "Groceries"};
@@ -42,7 +42,7 @@ public class InfoFragment extends Fragment {
 
         getActivity().setTitle("Add Task");
         dateHelper = new DateHelper();
-        infoController = new InfoController();
+        infoRepository = new InfoRepository();
 
 
         binding = FragmentInfoBinding.inflate(inflater, container, false);
@@ -92,7 +92,7 @@ public class InfoFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                infoController.selectDate(binding,getContext());
+                infoRepository.selectDate(binding,getContext());
             }
         });
 

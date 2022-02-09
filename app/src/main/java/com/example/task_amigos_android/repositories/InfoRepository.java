@@ -1,4 +1,4 @@
-package com.example.task_amigos_android.controller;// Created by FebinRukfan on 05-02-2022.
+package com.example.task_amigos_android.repositories;// Created by FebinRukfan on 05-02-2022.
 
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -9,7 +9,7 @@ import com.example.task_amigos_android.databinding.FragmentInfoBinding;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class InfoController {
+public class InfoRepository {
 
     private int mYear, mMonth, mDay;
     FragmentInfoBinding fragmentInfoBinding;
