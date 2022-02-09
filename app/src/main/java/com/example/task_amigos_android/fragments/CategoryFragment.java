@@ -117,6 +117,7 @@ public class CategoryFragment extends Fragment {
             public void onClick(View view) {
                 float alpha = pickerModal.getAlpha() == 0 ? 1 : 0;
                 MainActivity.ignoreSwipe = alpha == 1;
+                pickerModal.setClickable(alpha == 1);
                 AnimationHelper.animateAlpha(alpha, pickerModal);
             }
         };
@@ -131,6 +132,7 @@ public class CategoryFragment extends Fragment {
                 int color = Color.rgb(redBar.getProgress(),greenBar.getProgress(),blueBar.getProgress());
                 openPicker.setBackgroundColor(color);
                 openPicker.setTextColor(color);
+                pickerModal.setClickable(false);
                 AnimationHelper.animateAlpha(0, pickerModal);
             }
         });
