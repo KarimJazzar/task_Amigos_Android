@@ -19,7 +19,7 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="5dp"
-            app:layout_constraintBottom_toTopOf="@+id/addTask2"
+            app:layout_constraintBottom_toTopOf="@+id/addNewTaskBtn"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent="0.6">
@@ -59,7 +59,7 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="5dp"
-            app:layout_constraintBottom_toTopOf="@+id/addTask2"
+            app:layout_constraintBottom_toTopOf="@+id/addNewTaskBtn"
             app:layout_constraintLeft_toRightOf="@id/incompleteCol"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent="0.6">
@@ -93,7 +93,7 @@
         </FrameLayout>
 
         <Button
-            android:id="@+id/addTask2"
+            android:id="@+id/addNewTaskBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="15dp"

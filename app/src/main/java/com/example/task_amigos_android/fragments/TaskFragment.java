@@ -1,6 +1,7 @@
 package com.example.task_amigos_android.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -13,9 +14,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.TranslateAnimation;
+import android.widget.Button;
 import android.widget.FrameLayout;
 
 import com.example.task_amigos_android.R;
+import com.example.task_amigos_android.activities.AddEditTaskActivity;
+import com.example.task_amigos_android.activities.MainActivity;
 import com.example.task_amigos_android.adapter.TaskRVAdapter;
 import com.example.task_amigos_android.entities.Task;
 import com.example.task_amigos_android.helpers.AnimationHelper;
@@ -29,6 +33,7 @@ import java.util.List;
  */
 public class TaskFragment extends Fragment {
 
+    private Button addTaskBtn;
     private FrameLayout completeCol;
     private FrameLayout incompleteCol;
     private RecyclerView completeRV;
@@ -93,6 +98,16 @@ public class TaskFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         Context context = getActivity().getApplicationContext();
+
+        addTaskBtn = (Button) view.findViewById(R.id.addNewTaskBtn);
+
+        addTaskBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(getActivity(), AddEditTaskActivity.class);
+                startActivity(myIntent);
+            }
+        });
 
         completeCol = (FrameLayout) view.findViewById(R.id.completeCol);
         incompleteCol = (FrameLayout) view.findViewById(R.id.incompleteCol);
