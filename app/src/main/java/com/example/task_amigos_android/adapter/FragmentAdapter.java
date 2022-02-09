@@ -6,28 +6,47 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.task_amigos_android.ui.CompleteFragment;
-import com.example.task_amigos_android.ui.IncompleteFragment;
+import com.example.task_amigos_android.entities.Category;
+import com.example.task_amigos_android.entities.Task;
+import com.example.task_amigos_android.fragments.CategoryFragment;
+import com.example.task_amigos_android.fragments.TaskFragment;
+
+import java.util.List;
 
 public class FragmentAdapter extends FragmentStateAdapter {
-    public FragmentAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
-        super(fragmentManager, lifecycle);
-    }
+    private TaskFragment taskFragment = new TaskFragment();
+    private CategoryFragment categoryFragment = new CategoryFragment();
 
     @NonNull
     @Override
     public Fragment createFragment(int position) {
 
         if(position == 0){
-            return new IncompleteFragment();
+            return taskFragment;
         }else{
-            return new CompleteFragment();
+            return categoryFragment;
         }
 
     }
 
     @Override
     public int getItemCount() {
-        return 3;
+        return 2;
+    }
+
+    public FragmentAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
+        super(fragmentManager, lifecycle);
+    }
+
+    public void updateTaskTableList(List<Task> incompleteTask, List<Task> completeTask) {
+        taskFragment.updateAdaptersList(incompleteTask, completeTask);
+    }
+
+    public void updateTaskTablePosition(int position) {
+        taskFragment.updateColPosition(position);
+    }
+
+    public void updateCategoryTableList(List<Category> categories) {
+        categoryFragment.updateAdapterList(categories);
     }
 }

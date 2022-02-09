@@ -1,4 +1,4 @@
-package com.example.task_amigos_android.ui;
+package com.example.task_amigos_android.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -67,6 +67,11 @@ public class AddEditTaskActivity extends AppCompatActivity {
                 binding.tabLayout.selectTab(binding.tabLayout.getTabAt(position));
             }
         });
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            boolean value = extras.getBoolean("currentStatus");
+        }
 
     }
 

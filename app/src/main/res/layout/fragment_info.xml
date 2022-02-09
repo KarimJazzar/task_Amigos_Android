@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.InfoFragment">
+    tools:context=".fragments.InfoFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -12,28 +12,11 @@
         android:background="@color/light_grey_d51">
 
         <TextView
-            android:id="@+id/txtCreationDate"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="24dp"
-            android:background="@drawable/txt_style"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:textColor="@color/black"
-            android:text="12 - Feb - 2022"
-            android:gravity="center"
-            android:textSize="18sp"
-            app:layout_constraintHorizontal_bias="0.619"
-            app:layout_constraintStart_toEndOf="@+id/txtDuedate"
-            app:layout_constraintTop_toBottomOf="@+id/txtDesc4" />
-
-        <TextView
             android:id="@+id/txtName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
             android:text="Name: "
             android:textColor="@color/white"
             android:textSize="14sp"
@@ -45,9 +28,9 @@
             android:id="@+id/edtName"
             android:layout_width="0dp"
             android:layout_height="48dp"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="5dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="15dp"
             android:background="@drawable/et_style"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
@@ -59,7 +42,7 @@
             android:id="@+id/txtDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="8dp"
             android:text="Description: "
             android:textColor="@color/white"
@@ -71,12 +54,14 @@
         <EditText
             android:id="@+id/edtDesc"
             android:layout_width="0dp"
-            android:layout_height="300dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="5dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/et_style"
             android:inputType="textPersonName"
+            app:layout_constraintBottom_toTopOf="@+id/txtDesc2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -86,120 +71,131 @@
             android:id="@+id/txtDesc2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
             android:text="Category: "
             android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edtDesc" />
+            android:layout_marginLeft="15dp"
+            app:layout_constraintBottom_toTopOf="@+id/catSpinner"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/txtDesc5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="178dp"
-            android:layout_marginTop="8dp"
             android:text="Status: "
             android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/txtDesc2"
-            app:layout_constraintTop_toBottomOf="@+id/edtDesc" />
+            android:layout_marginLeft="15dp"
+            app:layout_constraintBottom_toTopOf="@+id/statSpinner"
+            app:layout_constraintStart_toEndOf="@+id/catSpinner" />
 
         <Spinner
             android:id="@+id/catSpinner"
+            style="@style/SpinnerTheme"
             android:layout_width="0dp"
             android:layout_height="48dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="20dp"
-            style="@style/SpinnerTheme"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/txtDesc3"
             app:layout_constraintEnd_toStartOf="@+id/statSpinner"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtDesc2" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Spinner
             android:id="@+id/statSpinner"
+            style="@style/SpinnerTheme"
             android:layout_width="0dp"
             android:layout_height="48dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="24dp"
-            style="@style/SpinnerTheme"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/txtDesc4"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/catSpinner"
-            app:layout_constraintTop_toBottomOf="@+id/txtDesc2" />
+            app:layout_constraintStart_toEndOf="@+id/catSpinner" />
 
         <TextView
             android:id="@+id/txtDesc3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
             android:text="Due Date: "
             android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/catSpinner" />
+            android:layout_marginStart="15dp"
+            app:layout_constraintBottom_toTopOf="@+id/txtDuedate"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/txtDesc4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="178dp"
-            android:layout_marginTop="8dp"
             android:text="Creation Date: "
             android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/txtDesc3"
-            app:layout_constraintTop_toBottomOf="@+id/catSpinner" />
+            android:layout_marginStart="15dp"
+            app:layout_constraintBottom_toTopOf="@+id/txtCreationDate"
+            app:layout_constraintStart_toEndOf="@+id/txtDuedate" />
 
         <TextView
             android:id="@+id/txtDuedate"
             android:layout_width="0dp"
             android:layout_height="48dp"
-            android:textColor="@color/black"
-            android:gravity="center"
-            android:textSize="18sp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="20dp"
-            android:text="12 - Feb - 2022"
             android:background="@drawable/txt_style"
+            android:gravity="center"
+            android:text="12 - Feb - 2022"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="15dp"
+            app:layout_constraintBottom_toTopOf="@+id/btnSave"
             app:layout_constraintEnd_toStartOf="@+id/txtCreationDate"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtDesc3" />
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/txtCreationDate"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:background="@drawable/txt_style"
+            android:gravity="center"
+            android:text="12 - Feb - 2022"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="15dp"
+            app:layout_constraintBottom_toTopOf="@+id/btnSave"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.619"
+            app:layout_constraintStart_toEndOf="@+id/txtDuedate" />
 
         <Button
             android:id="@+id/btnSave"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="15dp"
             android:backgroundTint="#1E88E5"
             android:text="Save"
             android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtCreationDate" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <Button
             android:id="@+id/btnDelete"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="15dp"
             android:backgroundTint="#E53935"
             android:text="Delete"
             android:textColor="@color/white"
-            app:layout_constraintEnd_toStartOf="@+id/btnSave"
-            app:layout_constraintTop_toBottomOf="@+id/txtCreationDate" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnSave" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
 </FrameLayout>

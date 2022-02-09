@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.example.task_amigos_android.R;
 import com.example.task_amigos_android.model.TaskModel;
-import com.example.task_amigos_android.ui.AddEditTaskActivity;
+import com.example.task_amigos_android.activities.AddEditTaskActivity;
 
 import java.util.ArrayList;
 
@@ -61,12 +61,12 @@ public class TaskAdapter extends BaseAdapter {
         holder.category.setText(data.get(i).getCategory());
         holder.dueDate.setText(data.get(i).getDueDate().toString());
 
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                activity.startActivity(new Intent(activity, AddEditTaskActivity.class));
-            }
-        });
+//        view.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                activity.startActivity(new Intent(activity, AddEditTaskActivity.class));
+//            }
+//        });
         return view;
     }
     static class ViewHolder{

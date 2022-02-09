@@ -15,13 +15,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Task_Amigos_Android">
         <activity
-            android:name=".ui.AudioActivity"
+            android:name=".activities.AudioActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.AddEditTaskActivity"
+            android:name=".activities.AddEditTaskActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

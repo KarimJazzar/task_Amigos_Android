@@ -6,9 +6,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.task_amigos_android.ui.AttachFragment;
-import com.example.task_amigos_android.ui.InfoFragment;
-import com.example.task_amigos_android.ui.SubTaskFragment;
+import com.example.task_amigos_android.fragments.AttachFragment;
+import com.example.task_amigos_android.fragments.InfoFragment;
+import com.example.task_amigos_android.fragments.SubTaskFragment;
 
 public class AddEditFrgAdapter extends FragmentStateAdapter {
     public AddEditFrgAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
