@@ -10,21 +10,11 @@ public class AnimationHelper {
         ObjectAnimator animation = ObjectAnimator.ofFloat(view, "translationX", x);
         animation.setDuration(500);
         animation.start();
+    }
 
-        //AnimationSet replaceAnimation = new AnimationSet(false);
-        //replaceAnimation.setFillAfter(true);
-
-        //int animType = TranslateAnimation.ABSOLUTE;
-        //float colLeft = incompleteCol.getLeft();
-        //float colTop = incompleteCol.getTop();
-        //float colWidth = incompleteCol.getMeasuredWidth();
-        //int[] location = new int[2];
-        //incompleteCol.getLocationInWindow(location);
-
-        //TranslateAnimation trans = new TranslateAnimation(type, fromX, type, toX, type, y, type, y);
-        //trans.setDuration(500);
-
-        //replaceAnimation.addAnimation(trans);
-        //view.startAnimation(replaceAnimation);
+    public static void animateAlpha(float alpha, View view) {
+        ObjectAnimator animation = ObjectAnimator.ofFloat(view, "alpha", alpha);
+        animation.setDuration(500);
+        animation.start();
     }
 }

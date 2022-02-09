@@ -37,24 +37,23 @@
             android:layout_marginRight="10dp"
             android:background="#FFFFFF"
             android:padding="2dp"
-            app:layout_constraintEnd_toStartOf="@+id/addCategoryBtn"
+            app:layout_constraintEnd_toStartOf="@+id/saveCategoryBtn"
             app:layout_constraintStart_toEndOf="@+id/categoryNameET"
             app:layout_constraintTop_toTopOf="parent" >
 
             <Button
-                android:id="@+id/selectColorBtn"
+                android:id="@+id/openColorPockerBtn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#03A9F4"
+                android:background="#000000"
                 android:text="0"
-                android:textColor="#00FFFFFF"
                 android:textSize="12sp"
                 tools:ignore="TouchTargetSizeCheck" />
 
         </FrameLayout>
 
         <Button
-            android:id="@+id/addCategoryBtn"
+            android:id="@+id/saveCategoryBtn"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:layout_marginTop="15dp"
@@ -82,11 +81,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/categoryNameET" />
 
-        <FrameLayout
-            android:id="@+id/colorCreation"
-            android:alpha="0"
+        <LinearLayout
+            android:id="@+id/colorPickerVIew"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:alpha="0"
             android:background="#CC000000"
             android:elevation="2dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -98,153 +97,129 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <FrameLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#2F2E35"
                     android:layout_marginLeft="50dp"
                     android:layout_marginRight="50dp"
+                    android:background="#2F2E35"
+                    android:orientation="vertical"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <SeekBar
-                            android:id="@+id/redValue"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="15dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginRight="15dp"
-                            android:max="255"
-                            android:progress="0"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/redTV" />
+                        android:layout_height="100dp"
+                        android:background="#FFFFFF"
+                        android:padding="3dp">
 
                         <FrameLayout
-                            android:id="@+id/categoryColorView"
+                            android:id="@+id/createdColorView"
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:background="#FFFFFF"
-                            android:padding="3dp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
+                            android:layout_height="match_parent"
+                            android:background="#000" />
 
-                            <FrameLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="#000" />
+                    </FrameLayout>
 
-                        </FrameLayout>
+                    <TextView
+                        android:id="@+id/redTV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="15dp"
+                        android:text="Red:"
+                        android:textColor="#FF0000" />
 
-                        <SeekBar
-                            android:id="@+id/greenValue"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="15dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginRight="15dp"
-                            android:max="255"
-                            android:progress="0"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/greenTV" />
+                    <SeekBar
+                        android:id="@+id/redValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="15dp"
+                        android:max="255"
+                        android:progress="0" />
 
-                        <TextView
-                            android:id="@+id/redTV"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="15dp"
-                            android:layout_marginTop="15dp"
-                            android:layout_marginRight="15dp"
-                            android:text="Red:"
-                            android:textColor="#FF0000"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/categoryColorView" />
+                    <TextView
+                        android:id="@+id/greenTV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="15dp"
+                        android:text="Green:"
+                        android:textColor="#00FF00" />
 
-                        <TextView
-                            android:id="@+id/greenTV"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="15dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginRight="15dp"
-                            android:text="Green:"
-                            android:textColor="#00FF00"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/redValue" />
+                    <SeekBar
+                        android:id="@+id/greenValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="15dp"
+                        android:max="255"
+                        android:progress="0" />
 
-                        <TextView
-                            android:id="@+id/blueTV"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="15dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginRight="15dp"
-                            android:text="Blue:"
-                            android:textColor="#0DEDED"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/greenValue" />
+                    <TextView
+                        android:id="@+id/blueTV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="15dp"
+                        android:text="Blue:"
+                        android:textColor="#0DEDED" />
 
-                        <SeekBar
-                            android:id="@+id/blueValue"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="15dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginRight="15dp"
-                            android:max="255"
-                            android:progress="0"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/blueTV" />
+                    <SeekBar
+                        android:id="@+id/blueValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="15dp"
+                        android:max="255"
+                        android:progress="0" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
 
                         <Button
-                            android:id="@+id/saveColorBtn"
+                            android:id="@+id/closeColorPickerBtn"
                             android:layout_width="wrap_content"
-                            android:layout_height="35dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
                             android:layout_marginTop="10dp"
                             android:layout_marginRight="15dp"
                             android:layout_marginBottom="15dp"
-                            android:background="#03A9F4"
-                            android:text="Select"
-                            android:textColor="#FFFFFF"
-                            android:textSize="12sp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/blueValue" />
-
-                        <Button
-                            android:id="@+id/cancelColorBtn"
-                            android:layout_width="wrap_content"
-                            android:layout_height="35dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginRight="15dp"
-                            android:layout_marginBottom="15dp"
-                            android:background="#E91E63"
+                            android:layout_weight="1"
+                            android:backgroundTint="#E91E63"
                             android:text="Cancel"
-                            android:textColor="#FFFFFF"
-                            android:textSize="12sp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/saveColorBtn"
-                            app:layout_constraintTop_toBottomOf="@+id/blueValue" />
+                            android:textColor="@color/white" />
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                        <Button
+                            android:id="@+id/SelectColorBtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginBottom="15dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="#2196F3"
+                            android:textColor="@color/white"
+                            android:text="Select" />
 
-                </FrameLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </FrameLayout>
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

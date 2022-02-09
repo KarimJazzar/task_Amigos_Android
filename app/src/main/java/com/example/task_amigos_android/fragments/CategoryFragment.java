@@ -1,20 +1,30 @@
 package com.example.task_amigos_android.fragments;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.SeekBar;
 
 import com.example.task_amigos_android.R;
+import com.example.task_amigos_android.activities.MainActivity;
 import com.example.task_amigos_android.adapter.CategoryRVAdapter;
 import com.example.task_amigos_android.entities.Category;
+import com.example.task_amigos_android.helpers.AnimationHelper;
+import com.example.task_amigos_android.model.CategoryViewModel;
 
 import java.util.List;
 
@@ -25,7 +35,14 @@ import java.util.List;
  */
 public class CategoryFragment extends Fragment {
 
+    private EditText categoryName;
+    private String selectedColor;
+    private Button selectColorBtn, closePicker, openPicker, saveCaegoryBtn;
+    private SeekBar redBar, greenBar, blueBar;
+    private FrameLayout createdColor;
+    private LinearLayout pickerModal;
     private RecyclerView categoryRV;
+    private CategoryViewModel categoryVM;
     private CategoryRVAdapter categoryAdapter = new CategoryRVAdapter();
 
     // TODO: Rename parameter arguments, choose names that match
@@ -70,6 +87,8 @@ public class CategoryFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        categoryVM = new ViewModelProvider(this).get(CategoryViewModel.class);
     }
 
     @Override
@@ -80,6 +99,69 @@ public class CategoryFragment extends Fragment {
         categoryRV.setLayoutManager(new LinearLayoutManager(context));
         categoryRV.setHasFixedSize(true);
         categoryRV.setAdapter(categoryAdapter);
+
+        categoryName = (EditText) view.findViewById(R.id.categoryNameET);
+
+        createdColor = (FrameLayout) view.findViewById(R.id.createdColorView);
+        pickerModal = (LinearLayout) view.findViewById(R.id.colorPickerVIew);
+
+        openPicker = (Button) view.findViewById(R.id.openColorPockerBtn);
+        closePicker = (Button) view.findViewById(R.id.closeColorPickerBtn);
+        selectColorBtn = (Button) view.findViewById(R.id.SelectColorBtn);
+        saveCaegoryBtn = (Button) view.findViewById(R.id.saveCategoryBtn);
+
+        View.OnClickListener toggleColorPicker = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                float alpha = pickerModal.getAlpha() == 0 ? 1 : 0;
+                MainActivity.ignoreSwipe = alpha == 1;
+                AnimationHelper.animateAlpha(alpha, pickerModal);
+            }
+        };
+
+        openPicker.setOnClickListener(toggleColorPicker);
+        closePicker.setOnClickListener(toggleColorPicker);
+
+        selectColorBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int color = Color.rgb(redBar.getProgress(),greenBar.getProgress(),blueBar.getProgress());
+                openPicker.setBackgroundColor(color);
+                openPicker.setTextColor(color);
+                AnimationHelper.animateAlpha(0, pickerModal);
+            }
+        });
+
+        saveCaegoryBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                
+            }
+        });
+
+        redBar = (SeekBar) view.findViewById(R.id.redValue);
+        greenBar = (SeekBar) view.findViewById(R.id.greenValue);
+        blueBar = (SeekBar) view.findViewById(R.id.blueValue);
+
+        SeekBar.OnSeekBarChangeListener seeckListener = new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                if (b) {
+                    int color = Color.rgb(redBar.getProgress(),greenBar.getProgress(),blueBar.getProgress());
+                    createdColor.setBackgroundColor(color);
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) { }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) { }
+        };
+
+        redBar.setOnSeekBarChangeListener(seeckListener);
+        greenBar.setOnSeekBarChangeListener(seeckListener);
+        blueBar.setOnSeekBarChangeListener(seeckListener);
     }
 
     @Override

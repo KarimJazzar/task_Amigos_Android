@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager2 pager;
     private FragmentAdapter fragmentAdapter;
+    public static boolean ignoreSwipe = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,6 +138,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
         View v = getCurrentFocus();
+        boolean ret = super.dispatchTouchEvent(event);
+
+        if(ignoreSwipe) { return ret; }
 
         switch(event.getAction()) {
             case MotionEvent.ACTION_DOWN:
@@ -165,10 +169,14 @@ public class MainActivity extends AppCompatActivity {
                         fragmentAdapter.updateTaskTablePosition(currentPosition);
                     }
                 }
+
+                x1 = 0;
+                x2 = 0;
+
                 break;
         }
 
-        boolean ret = super.dispatchTouchEvent(event);
+
         return ret;
     }
 }
