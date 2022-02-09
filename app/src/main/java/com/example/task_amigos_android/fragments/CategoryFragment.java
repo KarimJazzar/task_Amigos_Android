@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -117,7 +116,7 @@ public class CategoryFragment extends Fragment {
             public void onClick(View view) {
                 float alpha = pickerModal.getAlpha() == 0 ? 1 : 0;
                 MainActivity.ignoreSwipe = alpha == 1;
-                pickerModal.setClickable(alpha == 1);
+                togglePickerColorClick(alpha == 1);
                 AnimationHelper.animateAlpha(alpha, pickerModal);
             }
         };
@@ -132,7 +131,7 @@ public class CategoryFragment extends Fragment {
                 int color = Color.rgb(redBar.getProgress(),greenBar.getProgress(),blueBar.getProgress());
                 openPicker.setBackgroundColor(color);
                 openPicker.setTextColor(color);
-                pickerModal.setClickable(false);
+                togglePickerColorClick(false);
                 AnimationHelper.animateAlpha(0, pickerModal);
             }
         });
@@ -182,6 +181,8 @@ public class CategoryFragment extends Fragment {
         redBar.setOnSeekBarChangeListener(seeckListener);
         greenBar.setOnSeekBarChangeListener(seeckListener);
         blueBar.setOnSeekBarChangeListener(seeckListener);
+
+        togglePickerColorClick(false);
     }
 
     @Override
@@ -189,5 +190,14 @@ public class CategoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_category, container, false);
+    }
+
+    public void togglePickerColorClick(boolean enable) {
+        pickerModal.setClickable(enable);
+        closePicker.setClickable(enable);
+        selectColorBtn.setClickable(enable);
+        redBar.setEnabled(enable);
+        greenBar.setEnabled(enable);
+        blueBar.setEnabled(enable);
     }
 }
