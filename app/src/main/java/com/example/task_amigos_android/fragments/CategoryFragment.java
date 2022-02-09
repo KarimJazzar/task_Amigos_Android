@@ -127,6 +127,7 @@ public class CategoryFragment extends Fragment {
         selectColorBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                MainActivity.ignoreSwipe = false;
                 int color = Color.rgb(redBar.getProgress(),greenBar.getProgress(),blueBar.getProgress());
                 openPicker.setBackgroundColor(color);
                 openPicker.setTextColor(color);
