@@ -1,7 +1,12 @@
 package com.example.task_amigos_android.fragments;
 
 import static com.example.task_amigos_android.activities.MainActivity.incompleteTaskModels;
+import static com.example.task_amigos_android.ui.MainActivity.stat;
+import static com.example.task_amigos_android.ui.MainActivity.tCategory;
+import static com.example.task_amigos_android.ui.MainActivity.tDesc;
+import static com.example.task_amigos_android.ui.MainActivity.tName;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -10,11 +15,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 
 import com.example.task_amigos_android.R;
+import com.example.task_amigos_android.activities.AddEditTaskActivity;
 import com.example.task_amigos_android.adapter.TaskAdapter;
 import com.example.task_amigos_android.model.TaskModel;
 
@@ -50,8 +57,13 @@ public class IncompleteFragment extends Fragment implements View.OnClickListener
     private String selectedFilter = "all";
     private String currentFilterText = "";
 
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        tName = "";
+        tDesc = "";
+        tCategory = 0;
+
         incompleteT = (ListView) view.findViewById(R.id.incompleteTasks);
         TaskAdapter ia = new TaskAdapter(getContext(), incompleteTaskModels,getActivity());
         ia.notifyDataSetChanged();
@@ -93,6 +105,32 @@ public class IncompleteFragment extends Fragment implements View.OnClickListener
         shopping.setOnClickListener(this);
         groceries.setOnClickListener(this);
 
+        incompleteT.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                tName = incompleteTaskModels.get(position).getName();
+                tDesc = incompleteTaskModels.get(position).getDescription();
+                tCategory = getCat(incompleteTaskModels.get(position).getCategory());
+
+                Intent intent = new Intent(view.getContext(), AddEditTaskActivity.class);
+                stat = false;
+                //intent.putExtra("currentStatus", stat);
+                startActivity(intent);
+            }
+        });
+
+    }
+
+    public static int getCat(String category){
+        if(category == "Work"){
+            return 0;
+        }else if(category == "School"){
+            return 1;
+        }else if(category == "Shopping"){
+            return 2;
+        }else{
+            return 3;
+        }
     }
 
     private void filterList(String category)

@@ -61,12 +61,12 @@ public class TaskAdapter extends BaseAdapter {
         holder.category.setText(data.get(i).getCategory());
         holder.dueDate.setText(data.get(i).getDueDate().toString());
 
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                activity.startActivity(new Intent(activity, AddEditTaskActivity.class));
-            }
-        });
+//        view.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                activity.startActivity(new Intent(activity, AddEditTaskActivity.class));
+//            }
+//        });
         return view;
     }
     static class ViewHolder{

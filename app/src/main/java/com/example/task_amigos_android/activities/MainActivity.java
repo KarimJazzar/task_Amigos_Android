@@ -60,53 +60,9 @@ public class MainActivity extends AppCompatActivity {
         incompleteTaskModels = new ArrayList<>();
         completeTaskModels = new ArrayList<>();
 
-        /*
-        incompleteTaskModels.add(new TaskModel(1,"Incomplete 1","first incomplete task","Work",false, new ArrayList<>(),new ArrayList<>(),new ArrayList<>(), parseDate("2014-02-14"),parseDate("2014-02-14"),false));
-        incompleteTaskModels.add(new TaskModel(2,"Incomplete 2","second incomplete task","School",false, new ArrayList<>(),new ArrayList<>(),new ArrayList<>(), parseDate("2014-02-14"),parseDate("2014-02-14"),false));
-        incompleteTaskModels.add(new TaskModel(1,"Incomplete 3","first incomplete task","School",false, new ArrayList<>(),new ArrayList<>(),new ArrayList<>(), parseDate("2014-02-14"),parseDate("2014-02-14"),false));
-        incompleteTaskModels.add(new TaskModel(2,"Incomplete 4","second incomplete task","Groceries",false, new ArrayList<>(),new ArrayList<>(),new ArrayList<>(), parseDate("2014-02-14"),parseDate("2014-02-14"),false));
-        incompleteTaskModels.add(new TaskModel(2,"Incomplete 5","second incomplete task","Shopping",false, new ArrayList<>(),new ArrayList<>(),new ArrayList<>(), parseDate("2014-02-14"),parseDate("2014-02-14"),false));
-        incompleteTaskModels.add(new TaskModel(2,"Incomplete 6","second incomplete task","Work",false, new ArrayList<>(),new ArrayList<>(),new ArrayList<>(), parseDate("2014-02-14"),parseDate("2014-02-14"),false));
-        completeTaskModels.add(new TaskModel(1,"Complete 1","first incomplete task","Work",true, new ArrayList<>(),new ArrayList<>(),new ArrayList<>(), parseDate("2014-02-14"),parseDate("2014-02-14"),false));
-        completeTaskModels.add(new TaskModel(1,"Complete 2","second incomplete task","Work",true, new ArrayList<>(),new ArrayList<>(),new ArrayList<>(), parseDate("2014-02-14"),parseDate("2014-02-14"),false));
-        */
-
         tabLayout = findViewById(R.id.tab_layout);
-        pager = findViewById(R.id.taskViewPager);
+        pager = findViewById(R.id.mainViewPager);
         pager.setUserInputEnabled(false);
-
-        /*
-        pager.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                switch(motionEvent.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        x1 = motionEvent.getX();
-                        Log.d("DEBUG", "TOUCH DOWN");
-                        break;
-
-                    case MotionEvent.ACTION_MOVE:
-                        x2 = motionEvent.getX();
-                        Log.d("DEBUG", "TOUCH MOVE");
-                        break;
-
-                    case MotionEvent.ACTION_UP:
-                        Log.d("DEBUG", "TOUCH DOWN");
-                        if (Math.abs(x1 - x1) >= swipeDistance) {
-                            if (x1 < x2) {
-                                Log.d("DEBUG", "LEFT SWIPE");
-                            } else {
-                                Log.d("DEBUG", "RIGHT SWIPE");
-                            }
-                        }
-                        break;
-                }
-
-                return true;
-            }
-        });
-        */
-        //addT = findViewById(R.id.addTask);
 
         FragmentManager fm = getSupportFragmentManager();
         fragmentAdapter = new FragmentAdapter(fm, getLifecycle());
@@ -135,15 +91,6 @@ public class MainActivity extends AppCompatActivity {
                 tabLayout.selectTab(tabLayout.getTabAt(position));
             }
         });
-
-        /*
-        addT.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        */
 
         loadCategory();
         loadTask();

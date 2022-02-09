@@ -1,7 +1,12 @@
 package com.example.task_amigos_android.fragments;
 
-import android.os.Bundle;
 
+import static com.example.task_amigos_android.ui.MainActivity.tCategory;
+import static com.example.task_amigos_android.ui.MainActivity.tDesc;
+import static com.example.task_amigos_android.ui.MainActivity.tName;
+import static com.example.task_amigos_android.ui.MainActivity.stat;
+
+import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -9,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 
 import com.example.task_amigos_android.controller.InfoController;
 import com.example.task_amigos_android.databinding.FragmentInfoBinding;
@@ -22,8 +28,9 @@ public class InfoFragment extends Fragment {
     private FragmentInfoBinding binding;
     DateHelper dateHelper;
     InfoController infoController;
+    EditText taskName,taskDesc;
     final String[] statusStr = {"Incomplete", "Complete"};
-    final String[] catStr = {"Work", "School", "Shopping", "Work"};
+    final String[] catStr = {"Work", "School", "Shopping", "Groceries"};
 
 
     @Override
@@ -93,6 +100,21 @@ public class InfoFragment extends Fragment {
                 infoController.selectDate(binding,getContext());
             }
         });
+
+        //taskName = view.findViewById(R.id.edtName);
+        //taskDesc = view.findViewById(R.id.edtDesc);
+
+        if(tName != ""){
+            taskName.setText(tName);
+            taskDesc.setText(tDesc);
+            binding.catSpinner.setSelection(tCategory);
+            if(stat == false){
+                binding.statSpinner.setSelection(0);
+            }else{
+                binding.statSpinner.setSelection(1);
+            }
+        }
+
         return view;
 
     }
