@@ -23,6 +23,10 @@ public class CategoryRepository {
         new CategoryRepository.AsyncInsert(categoryDao).execute(category);
     }
 
+    public void deleteById(int id) {
+        new CategoryRepository.AsyncDeleteByID(categoryDao).execute(id);
+    }
+
     public LiveData<List<Category>> getAllCategories() {
         return allCategories;
     }
@@ -37,6 +41,20 @@ public class CategoryRepository {
         @Override
         protected Void doInBackground(Category... category) {
             categoryAsyncDao.insert(category[0]);
+            return null;
+        }
+    }
+
+    private static class AsyncDeleteByID extends AsyncTask<Integer, Void, Void> {
+        private CategoryDao categoryAsyncDao;
+
+        private AsyncDeleteByID(CategoryDao dao) {
+            this.categoryAsyncDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(Integer... ints) {
+            categoryAsyncDao.deleteCategoryById(ints[0]);
             return null;
         }
     }

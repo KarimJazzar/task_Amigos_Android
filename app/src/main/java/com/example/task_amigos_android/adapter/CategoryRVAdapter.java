@@ -1,22 +1,30 @@
 package com.example.task_amigos_android.adapter;
 
+import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.task_amigos_android.R;
 import com.example.task_amigos_android.entities.Category;
+import com.example.task_amigos_android.model.CategoryViewModel;
 
 public class CategoryRVAdapter extends ListAdapter<Category, CategoryRVAdapter.ViewHolder> {
     // creating a variable for on item click listener.
     private CategoryRVAdapter.OnItemClickListener listener;
+    CategoryViewModel categoryVM;
 
     // creating a constructor class for our adapter class.
     public CategoryRVAdapter() {
@@ -43,6 +51,11 @@ public class CategoryRVAdapter extends ListAdapter<Category, CategoryRVAdapter.V
         // below line is use to inflate our layout
         // file for each item of our recycler view.
         View item = LayoutInflater.from(parent.getContext()).inflate(R.layout.category_rv_item, parent, false);
+        // ==========================
+        // THIS VIEW MODEL CAN STAY HERE
+        // TEMPORAL SOLUTION
+        categoryVM = new ViewModelProvider((ViewModelStoreOwner)  parent.getContext()).get(CategoryViewModel.class);
+        // ==========================
         return new CategoryRVAdapter.ViewHolder(item);
     }
 
@@ -51,7 +64,18 @@ public class CategoryRVAdapter extends ListAdapter<Category, CategoryRVAdapter.V
         // below line of code is use to set data to
         // each item of our recycler view.
         Category model = getCategoryAt(position);
+        holder.tempID = model.getId();
         holder.nameTV.setText(model.getName());
+        holder.nameTV.setTextColor(model.getColor());
+        holder.colorFL.setBackgroundColor(model.getColor());
+        holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("DEBUG", "" + holder.tempID);
+                categoryVM.deleteById(holder.tempID);
+                Toast.makeText(view.getContext(), "Category deleted", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     // creating a method to get category modal for a specific position.
@@ -64,6 +88,8 @@ public class CategoryRVAdapter extends ListAdapter<Category, CategoryRVAdapter.V
         TextView nameTV;
         FrameLayout colorFL;
         Button deleteBtn;
+        Context context;
+        int tempID;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);

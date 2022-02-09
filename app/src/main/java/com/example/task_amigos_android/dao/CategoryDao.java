@@ -21,6 +21,9 @@ public interface CategoryDao {
     @Update
     void update(Category task);
 
+    @Query("DELETE FROM category WHERE id = :categoryId")
+    void deleteCategoryById(long categoryId);
+
     @Delete
     void delete(Category task);
 }

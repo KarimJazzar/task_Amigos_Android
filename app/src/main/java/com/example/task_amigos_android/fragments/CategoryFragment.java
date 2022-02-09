@@ -2,6 +2,7 @@ package com.example.task_amigos_android.fragments;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -10,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
+import android.widget.Toast;
 
 import com.example.task_amigos_android.R;
 import com.example.task_amigos_android.activities.MainActivity;
@@ -36,7 +39,6 @@ import java.util.List;
 public class CategoryFragment extends Fragment {
 
     private EditText categoryName;
-    private String selectedColor;
     private Button selectColorBtn, closePicker, openPicker, saveCaegoryBtn;
     private SeekBar redBar, greenBar, blueBar;
     private FrameLayout createdColor;
@@ -135,7 +137,22 @@ public class CategoryFragment extends Fragment {
         saveCaegoryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                
+                String name = categoryName.getText().toString();
+
+                if(name.equals("")) {
+                    Toast.makeText(view.getContext(), "Category name can't be empty.", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                Category newCategory = new Category();
+                newCategory.setName(name);
+                ColorDrawable bgColor = (ColorDrawable) openPicker.getBackground();
+                newCategory.setColor(bgColor.getColor());
+
+                categoryVM.insert(newCategory);
+                Toast.makeText(view.getContext(), "Category saved", Toast.LENGTH_SHORT).show();
+
+                categoryName.setText("");
             }
         });
 

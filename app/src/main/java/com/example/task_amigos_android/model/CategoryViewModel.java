@@ -26,4 +26,6 @@ public class CategoryViewModel extends AndroidViewModel {
     public void insert(Category category) {
         categoryRepo.insert(category);
     }
+
+    public void deleteById(int id) { categoryRepo.deleteById(id); }
 }
