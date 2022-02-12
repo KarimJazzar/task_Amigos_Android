@@ -4,6 +4,7 @@ package com.example.task_amigos_android.fragments;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +12,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 
+import com.example.task_amigos_android.entities.Category;
 import com.example.task_amigos_android.repositories.InfoRepository;
 import com.example.task_amigos_android.databinding.FragmentInfoBinding;
 import com.example.task_amigos_android.helpers.DateHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class InfoFragment extends Fragment {
@@ -25,19 +30,18 @@ public class InfoFragment extends Fragment {
     InfoRepository infoRepository;
     EditText taskName,taskDesc;
     final String[] statusStr = {"Incomplete", "Complete"};
-    final String[] catStr = {"Work", "School", "Shopping", "Groceries"};
-
+    private List<String> catStr = new ArrayList<>();
+    private ArrayAdapter<String> categoryAdapter;
+    private ArrayAdapter<String> statusAdapter;
+    private List<Category> categories;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
         getActivity().setTitle("Add Task");
@@ -48,11 +52,10 @@ public class InfoFragment extends Fragment {
         binding = FragmentInfoBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        ArrayAdapter<String> adp1 = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_spinner_item, statusStr);
-        adp1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        statusAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, statusStr);
+        statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        binding.statSpinner.setAdapter(adp1);
+        binding.statSpinner.setAdapter(statusAdapter);
         binding.statSpinner.setSelection(0);
 
         binding.statSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
@@ -67,11 +70,9 @@ public class InfoFragment extends Fragment {
             }
         });
 
-     ArrayAdapter<String> adp2 = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_spinner_item, catStr);
-        adp2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        binding.catSpinner.setAdapter(adp2);
+        categoryAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, catStr);
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        binding.catSpinner.setAdapter(categoryAdapter);
         binding.catSpinner.setSelection(0);
 
         binding.catSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
@@ -121,4 +122,14 @@ public class InfoFragment extends Fragment {
         binding = null;
     }
 
+    public void setCategoryList(List<Category> categories) {
+        this.categories = categories;
+        categoryAdapter.clear();
+        categoryAdapter.add("None");
+
+        for (Category category : categories) {
+            categoryAdapter.add(category.getName());
+        }
+        categoryAdapter.notifyDataSetChanged();
+    }
 }

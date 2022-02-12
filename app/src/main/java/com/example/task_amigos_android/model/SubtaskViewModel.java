@@ -11,21 +11,19 @@ import com.example.task_amigos_android.repositories.SubtaskRepository;
 import java.util.List;
 
 public class SubtaskViewModel extends AndroidViewModel {
-    private int taskId;
     private SubtaskRepository subtaskRepo;
     private LiveData<List<Subtask>> allSubtask;
 
-    public SubtaskViewModel(@NonNull Application application, int taskId) {
+    public SubtaskViewModel(@NonNull Application application) {
         super(application);
-        this.taskId = taskId;
-        subtaskRepo = new SubtaskRepository(application, taskId);
+        subtaskRepo = new SubtaskRepository(application);
         allSubtask = subtaskRepo.getAllSubtask();
     }
 
     public LiveData<List<Subtask>> getAllSubtask() {
         return allSubtask;
     }
-
+    public List<Subtask> getSubtaskByTaskId(int id) { return subtaskRepo.getByTaskId(id); }
     public void insert(Subtask subtask) {
         subtaskRepo.insert(subtask);
     }

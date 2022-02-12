@@ -3,6 +3,8 @@ package com.example.task_amigos_android.activities;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
@@ -13,22 +15,38 @@ import android.view.View;
 
 import com.example.task_amigos_android.R;
 import com.example.task_amigos_android.adapter.AddEditFrgAdapter;
+import com.example.task_amigos_android.entities.Category;
+import com.example.task_amigos_android.entities.Subtask;
+import com.example.task_amigos_android.entities.Task;
+import com.example.task_amigos_android.model.CategoryViewModel;
+import com.example.task_amigos_android.model.SubtaskViewModel;
+import com.example.task_amigos_android.model.TaskViewModel;
 import com.example.task_amigos_android.repositories.AttachRespository;
 import com.example.task_amigos_android.databinding.ActivityAddEditTaskBinding;
 import com.google.android.material.tabs.TabLayout;
 
-public class AddEditTaskActivity extends AppCompatActivity {
+import java.util.List;
 
-    ViewPager2 pager;
-    AddEditFrgAdapter adapter;
-    String TAG = this.getClass().getName();
+public class AddEditTaskActivity extends AppCompatActivity {
+    // Entities models
+    private TaskViewModel taskVM;
+    private SubtaskViewModel subtaskVM;
+    private CategoryViewModel categoryVM;
+    private AddEditFrgAdapter fragmentAdapter;
     private ActivityAddEditTaskBinding binding;
-    AttachRespository attachRespository;
+    private List<Subtask>  subtaskList;
+    private Boolean isEditMode = false;
+    private Task selectedTask;
+
+    private ViewPager2 pager;
+    private String TAG = this.getClass().getName();
+    private AttachRespository attachRespository;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         binding = ActivityAddEditTaskBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
@@ -41,12 +59,12 @@ public class AddEditTaskActivity extends AppCompatActivity {
         pager = findViewById(R.id.view_pager2);
 
         FragmentManager fm = getSupportFragmentManager();
-        adapter = new AddEditFrgAdapter(fm, getLifecycle());
-        pager.setAdapter(adapter);
+        fragmentAdapter = new AddEditFrgAdapter(fm, getLifecycle());
+        pager.setAdapter(fragmentAdapter);
 
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Add Info"));
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Add Sub Task"));
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Attach Media"));
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Info"));
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Subtask"));
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Attach"));
 
         binding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -78,6 +96,15 @@ public class AddEditTaskActivity extends AppCompatActivity {
             boolean value = extras.getBoolean("currentStatus");
         }
 
+        taskVM = new ViewModelProvider(this).get(TaskViewModel.class);
+        categoryVM = new ViewModelProvider(this).get(CategoryViewModel.class);
+
+        if (isEditMode) {
+            subtaskVM = new ViewModelProvider(this).get(SubtaskViewModel.class);
+            loadSubtask();
+        }
+
+        loadCategory();
     }
 
     public boolean onOptionsItemSelected(MenuItem item){
@@ -93,6 +120,19 @@ public class AddEditTaskActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void loadSubtask() {
+        subtaskList = subtaskVM.getSubtaskByTaskId(selectedTask.getId());
+    }
+
+    private void loadCategory() {
+        categoryVM.getAllCategories().observe(this, new Observer<List<Category>>() {
+            @Override
+            public void onChanged(List<Category> categories) {
+                fragmentAdapter.sendCategoriesToInfoFrag(categories);
+            }
+        });
     }
 
     @Override

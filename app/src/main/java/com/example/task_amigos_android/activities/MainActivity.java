@@ -41,12 +41,6 @@ public class MainActivity extends AppCompatActivity {
     private final float swipeDistance = 150;
     private int currentPosition = 0;
 
-    // ======================================
-    // We eed to delete this later on
-    public static ArrayList<TaskModel> incompleteTaskModels;
-    public static ArrayList<TaskModel> completeTaskModels;
-    // ======================================
-
     private TabLayout tabLayout;
     private ViewPager2 pager;
     private FragmentAdapter fragmentAdapter;
@@ -59,9 +53,6 @@ public class MainActivity extends AppCompatActivity {
 
         taskVM = new ViewModelProvider(this).get(TaskViewModel.class);
         categoryVM = new ViewModelProvider(this).get(CategoryViewModel.class);
-
-        incompleteTaskModels = new ArrayList<>();
-        completeTaskModels = new ArrayList<>();
 
         tabLayout = findViewById(R.id.tab_layout);
         pager = findViewById(R.id.mainViewPager);
