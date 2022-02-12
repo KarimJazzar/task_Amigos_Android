@@ -30,8 +30,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     // List containers
-    private List<Task> completeList;
-    private List<Task> incompleteList;
+    private List<Task> completeList = new ArrayList<>();
+    private List<Task> incompleteList = new ArrayList<>();
     private List<Category> categoryList;
     // Entities models
     private TaskViewModel taskVM;
@@ -94,9 +94,11 @@ public class MainActivity extends AppCompatActivity {
         taskVM.getAllTask().observe(this, new Observer<List<Task>>() {
             @Override
             public void onChanged(@Nullable final List<Task> taskList) {
+                completeList.clear();
+                incompleteList.clear();
 
                 for(Task task: taskList) {
-                    if (task.getStatus()) {
+                    if (task.getStatus() == true) {
                         completeList.add(task);
                     } else {
                         incompleteList.add(task);

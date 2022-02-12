@@ -19,6 +19,7 @@
             android:exported="false" />
         <activity
             android:name=".activities.AddEditTaskActivity"
+            android:windowSoftInputMode="adjustPan"
             android:exported="false" />
         <activity
             android:name=".activities.MainActivity"
