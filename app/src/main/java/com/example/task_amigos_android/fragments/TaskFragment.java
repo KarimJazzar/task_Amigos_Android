@@ -61,6 +61,11 @@ public class TaskFragment extends Fragment {
         completeAdapter.submitList(completeTask);
     }
 
+    public void refreshAdapter() {
+        incompleteAdapter.notifyDataSetChanged();
+        completeAdapter.notifyDataSetChanged();
+    }
+
     public void updateColPosition(int position) {
         colMargin = colMargin == 0 ? incompleteCol.getLeft() : colMargin;
 

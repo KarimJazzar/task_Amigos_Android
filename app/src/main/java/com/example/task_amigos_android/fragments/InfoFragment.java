@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.task_amigos_android.entities.Category;
 import com.example.task_amigos_android.entities.Task;
+import com.example.task_amigos_android.helpers.CategoryHelper;
 import com.example.task_amigos_android.model.CategoryViewModel;
 import com.example.task_amigos_android.model.TaskViewModel;
 import com.example.task_amigos_android.repositories.InfoRepository;
@@ -145,7 +146,7 @@ public class InfoFragment extends Fragment {
     private void saveTask(View view) {
         String title = binding.edtName.getText().toString();
         String description = binding.edtDesc.getText().toString();
-        int category = binding.catSpinner.getSelectedItemPosition() - 1;
+        int category = CategoryHelper.getCategoryId(binding.catSpinner.getSelectedItem().toString());
         boolean isComplete = false;
         Date duDate = new Date();
 
@@ -168,6 +169,7 @@ public class InfoFragment extends Fragment {
 
         Task tempTask = new Task();
         tempTask.setTitle(title);
+        tempTask.setCategory(category);
         tempTask.setDescription(description);
         tempTask.setDueDate(duDate);
         tempTask.setCreationDate(DateHelper.getCurrentDate());

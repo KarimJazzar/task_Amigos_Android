@@ -13,7 +13,10 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.task_amigos_android.R;
+import com.example.task_amigos_android.entities.Category;
 import com.example.task_amigos_android.entities.Task;
+import com.example.task_amigos_android.helpers.CategoryHelper;
+import com.example.task_amigos_android.helpers.DateHelper;
 
 public class TaskRVAdapter extends ListAdapter<Task, TaskRVAdapter.ViewHolder> {
     // creating a variable for on item click listener.
@@ -53,6 +56,11 @@ public class TaskRVAdapter extends ListAdapter<Task, TaskRVAdapter.ViewHolder> {
         // each item of our recycler view.
         Task model = getTaskAt(position);
         holder.titleTV.setText(model.getTitle());
+        holder.dueDateTV.setText(DateHelper.dateToString(model.getDueDate()));
+        Category category = CategoryHelper.getCategory(model.getCategory());
+        holder.colorFL.setBackgroundColor(category.getColor());
+        holder.categoryTV.setText(category.getName());
+        holder.categoryTV.setTextColor(category.getColor());
     }
 
     // creating a method to get task modal for a specific position.

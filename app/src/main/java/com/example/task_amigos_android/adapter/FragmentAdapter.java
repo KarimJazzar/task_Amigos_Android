@@ -38,15 +38,19 @@ public class FragmentAdapter extends FragmentStateAdapter {
         super(fragmentManager, lifecycle);
     }
 
-    public void updateTaskTableList(List<Task> incompleteTask, List<Task> completeTask) {
+    public void updateTaskFragmentList(List<Task> incompleteTask, List<Task> completeTask) {
         taskFragment.updateAdaptersList(incompleteTask, completeTask);
     }
 
-    public void updateTaskTablePosition(int position) {
+    public void animateTaskFragmentCol(int position) {
         taskFragment.updateColPosition(position);
     }
 
-    public void updateCategoryTableList(List<Category> categories) {
+    public void updateCategoryFragmentList(List<Category> categories) {
         categoryFragment.updateAdapterList(categories);
+    }
+
+    public void refreshTaskCategoryList() {
+        taskFragment.refreshAdapter();
     }
 }

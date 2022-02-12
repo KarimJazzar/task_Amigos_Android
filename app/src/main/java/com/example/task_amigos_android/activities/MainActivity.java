@@ -8,31 +8,25 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 
 import com.example.task_amigos_android.adapter.FragmentAdapter;
 import com.example.task_amigos_android.R;
 import com.example.task_amigos_android.entities.Category;
 import com.example.task_amigos_android.entities.Task;
+import com.example.task_amigos_android.helpers.CategoryHelper;
 import com.example.task_amigos_android.model.CategoryViewModel;
-import com.example.task_amigos_android.model.TaskModel;
 import com.example.task_amigos_android.model.TaskViewModel;
 import com.google.android.material.tabs.TabLayout;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     // List containers
     private List<Task> completeList = new ArrayList<>();
     private List<Task> incompleteList = new ArrayList<>();
-    private List<Category> categoryList;
     // Entities models
     private TaskViewModel taskVM;
     private CategoryViewModel categoryVM;
@@ -105,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
 
-                fragmentAdapter.updateTaskTableList(incompleteList, completeList);
+                fragmentAdapter.updateTaskFragmentList(incompleteList, completeList);
             }
         });
     }
@@ -114,18 +108,11 @@ public class MainActivity extends AppCompatActivity {
         categoryVM.getAllCategories().observe(this, new Observer<List<Category>>() {
             @Override
             public void onChanged(List<Category> categories) {
-                categoryList = categories;
-                fragmentAdapter.updateCategoryTableList(categories);
+                CategoryHelper.categories = categories;
+                fragmentAdapter.updateCategoryFragmentList(categories);
+                fragmentAdapter.refreshTaskCategoryList();
             }
         });
-    }
-
-    public static Date parseDate(String date) {
-        try {
-            return new SimpleDateFormat("yyyy-MM-dd").parse(date);
-        } catch (ParseException e) {
-            return null;
-        }
     }
 
     @Override
@@ -159,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
                         pager.setCurrentItem(1);
                     } else {
                         pager.setCurrentItem(0);
-                        fragmentAdapter.updateTaskTablePosition(currentPosition);
+                        fragmentAdapter.animateTaskFragmentCol(currentPosition);
                     }
                 }
 
@@ -168,7 +155,6 @@ public class MainActivity extends AppCompatActivity {
 
                 break;
         }
-
 
         return ret;
     }

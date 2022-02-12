@@ -27,6 +27,7 @@ public class TaskAdapter extends BaseAdapter {
         inflater=LayoutInflater.from(context);
         activity = a;
     }
+
     @Override
     public int getCount() {
         return data.size();
@@ -47,19 +48,21 @@ public class TaskAdapter extends BaseAdapter {
         ViewHolder holder;
         if(view==null)
         {
+            /*
             view=inflater.inflate(R.layout.task_view_layout,null);
             holder=new ViewHolder();
             holder.name =view.findViewById(R.id.name);
             holder.category =view.findViewById(R.id.category);
             holder.dueDate =view.findViewById(R.id.dueDate);
             view.setTag(holder);
+            */
 
         }else {
             holder = (ViewHolder) view.getTag();
         }
-        holder.name.setText(data.get(i).getName());
-        holder.category.setText(data.get(i).getCategory());
-        holder.dueDate.setText(data.get(i).getDueDate().toString());
+        //holder.name.setText(data.get(i).getName());
+        //holder.category.setText(data.get(i).getCategory());
+        //holder.dueDate.setText(data.get(i).getDueDate().toString());
 
 //        view.setOnClickListener(new View.OnClickListener() {
 //            @Override
