@@ -194,6 +194,8 @@ public class InfoFragment extends Fragment {
         tempTask.setStatus(isComplete);
 
         if (isEditMode) {
+            isComplete = binding.statSpinner.getSelectedItemPosition() == 1;
+            tempTask.setStatus(isComplete);
             tempTask.setId(selectedTask.getId());
             taskVM.update(tempTask);
             Toast.makeText(view.getContext(), "Task updated.", Toast.LENGTH_SHORT).show();
