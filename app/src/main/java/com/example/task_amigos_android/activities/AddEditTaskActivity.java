@@ -31,7 +31,6 @@ public class AddEditTaskActivity extends AppCompatActivity {
     // Entities models
     private TaskViewModel taskVM;
     private SubtaskViewModel subtaskVM;
-    private CategoryViewModel categoryVM;
     private AddEditFrgAdapter fragmentAdapter;
     private ActivityAddEditTaskBinding binding;
     private List<Subtask>  subtaskList;
@@ -97,14 +96,17 @@ public class AddEditTaskActivity extends AppCompatActivity {
         }
 
         taskVM = new ViewModelProvider(this).get(TaskViewModel.class);
-        categoryVM = new ViewModelProvider(this).get(CategoryViewModel.class);
 
         if (isEditMode) {
             subtaskVM = new ViewModelProvider(this).get(SubtaskViewModel.class);
             loadSubtask();
         }
 
-        loadCategory();
+        Task selectedTask = (Task) getIntent().getSerializableExtra("Task");
+
+        if(selectedTask != null) {
+            fragmentAdapter.sendTaskToInfoFragment(selectedTask);
+        }
     }
 
     public boolean onOptionsItemSelected(MenuItem item){
@@ -124,15 +126,6 @@ public class AddEditTaskActivity extends AppCompatActivity {
 
     private void loadSubtask() {
         subtaskList = subtaskVM.getSubtaskByTaskId(selectedTask.getId());
-    }
-
-    private void loadCategory() {
-        categoryVM.getAllCategories().observe(this, new Observer<List<Category>>() {
-            @Override
-            public void onChanged(List<Category> categories) {
-                fragmentAdapter.sendCategoriesToInfoFrag(categories);
-            }
-        });
     }
 
     @Override

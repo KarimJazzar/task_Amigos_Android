@@ -45,6 +45,7 @@ public class InfoFragment extends Fragment {
     private List<String> catStr = new ArrayList<>();
     private boolean isEditMode = false;
     private TaskViewModel taskVM;
+    private Task selectedTask = new Task();
     private final String[] statusStr = {"Incomplete", "Complete"};
 
     @Override
@@ -87,6 +88,7 @@ public class InfoFragment extends Fragment {
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.catSpinner.setAdapter(categoryAdapter);
         binding.catSpinner.setSelection(0);
+        setCategoryList(CategoryHelper.categories);
 
         binding.catSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
         {
@@ -121,6 +123,13 @@ public class InfoFragment extends Fragment {
             binding.btnDelete.setAlpha(0);
             binding.btnDelete.setEnabled(false);
             binding.statSpinner.setEnabled(false);
+        } else {
+            binding.edtName.setText(selectedTask.getTitle());
+            binding.edtDesc.setText(selectedTask.getDescription());
+            binding.catSpinner.setSelection(CategoryHelper.getCategoryIndex(selectedTask.getCategory()));
+            binding.statSpinner.setSelection(selectedTask.getStatus() ? 1 : 0);
+            binding.txtDuedate.setText(DateHelper.dateToString(selectedTask.getDueDate()));
+            binding.txtCreationDate.setText(DateHelper.dateToString(selectedTask.getCreationDate()));
         }
 
         binding.btnDelete.setOnClickListener(new View.OnClickListener() {
@@ -193,16 +202,23 @@ public class InfoFragment extends Fragment {
 
     public void setCategoryList(List<Category> categories) {
         this.categories = categories;
+
+        if(categoryAdapter == null) {
+            return;
+        }
+
         categoryAdapter.clear();
         categoryAdapter.add("None");
 
         for (Category category : categories) {
             categoryAdapter.add(category.getName());
         }
+
         categoryAdapter.notifyDataSetChanged();
     }
 
-    public void setEditMode(boolean isEditMode) {
-        this.isEditMode = isEditMode;
+    public void setSelectedTask(Task task) {
+        isEditMode = true;
+        selectedTask = task;
     }
 }

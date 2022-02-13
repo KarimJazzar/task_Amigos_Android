@@ -9,6 +9,7 @@ import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.task_amigos_android.entities.Category;
+import com.example.task_amigos_android.entities.Task;
 import com.example.task_amigos_android.fragments.AttachFragment;
 import com.example.task_amigos_android.fragments.InfoFragment;
 import com.example.task_amigos_android.fragments.SubTaskFragment;
@@ -42,8 +43,8 @@ public class AddEditFrgAdapter extends FragmentStateAdapter {
         return 3;
     }
 
-    public void sendCategoriesToInfoFrag(List<Category> categories) {
-        infoFrag.setCategoryList(categories);
+    public void sendTaskToInfoFragment(Task task) {
+        infoFrag.setSelectedTask(task);
     }
 }
 

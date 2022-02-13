@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -128,10 +129,11 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case MotionEvent.ACTION_MOVE:
-                x2 = event.getX();
                 break;
 
             case MotionEvent.ACTION_UP:
+                x2 = event.getX();
+
                 if (Math.abs(x1 - x2) >= swipeDistance) {
                     if (x1 < x2) {
                         currentPosition--;

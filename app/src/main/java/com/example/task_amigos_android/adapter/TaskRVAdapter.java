@@ -1,5 +1,7 @@
 package com.example.task_amigos_android.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,8 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.task_amigos_android.R;
+import com.example.task_amigos_android.activities.AddEditTaskActivity;
+import com.example.task_amigos_android.activities.MainActivity;
 import com.example.task_amigos_android.entities.Category;
 import com.example.task_amigos_android.entities.Task;
 import com.example.task_amigos_android.helpers.CategoryHelper;
@@ -90,6 +94,12 @@ public class TaskRVAdapter extends ListAdapter<Task, TaskRVAdapter.ViewHolder> {
                     // inside on click listener we are passing
                     // position to our item of recycler view.
                     int position = getAdapterPosition();
+                    Context context = v.getContext();
+
+                    Intent intent = new Intent(context, AddEditTaskActivity.class);
+                    intent.putExtra("Task", getTaskAt(position));
+                    context.startActivity(intent);
+
                     if (listener != null && position != RecyclerView.NO_POSITION) {
                         listener.onItemClick(getItem(position));
                     }
@@ -101,6 +111,7 @@ public class TaskRVAdapter extends ListAdapter<Task, TaskRVAdapter.ViewHolder> {
     public interface OnItemClickListener {
         void onItemClick(Task model);
     }
+
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
     }

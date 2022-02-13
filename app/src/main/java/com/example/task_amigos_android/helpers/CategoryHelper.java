@@ -20,6 +20,18 @@ public class CategoryHelper {
         return Color.WHITE;
     }
 
+    public static int getCategoryIndex(int id) {
+        int index = 1; // Start in 1 since we have a default None category;
+        for(Category category : categories)  {
+            if(category.getId() == id) {
+                return index;
+            }
+            index++;
+        }
+
+        return 0;
+    }
+
     public static int getCategoryId(String name) {
         for(Category category : categories)  {
             if(category.getName().equals(name)) {
