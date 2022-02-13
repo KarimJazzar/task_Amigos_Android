@@ -135,7 +135,7 @@ public class InfoFragment extends Fragment {
         binding.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                deleteTask(view);
             }
         });
         return view;
@@ -150,6 +150,13 @@ public class InfoFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    private void deleteTask(View view) {
+        isEditMode = false;
+        clearInputs();
+        taskVM.delete(selectedTask);
+        Toast.makeText(view.getContext(), "Task deleted.", Toast.LENGTH_SHORT).show();
     }
 
     private void saveTask(View view) {
@@ -187,6 +194,8 @@ public class InfoFragment extends Fragment {
         tempTask.setStatus(isComplete);
 
         if (isEditMode) {
+            tempTask.setId(selectedTask.getId());
+            taskVM.update(tempTask);
             Toast.makeText(view.getContext(), "Task updated.", Toast.LENGTH_SHORT).show();
         } else {
             taskVM.insert(tempTask);

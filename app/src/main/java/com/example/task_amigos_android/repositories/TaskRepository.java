@@ -22,6 +22,12 @@ public class TaskRepository {
     public void insert(Task task) {
         new AsyncInsert(taskDao).execute(task);
     }
+    public void delete(Task task) {
+        new AsyncDelete(taskDao).execute(task);
+    }
+    public void update(Task task) {
+        new AsyncUpdate(taskDao).execute(task);
+    }
 
     public LiveData<List<Task>> getAllTask() {
         return allTask;
@@ -37,6 +43,34 @@ public class TaskRepository {
         @Override
         protected Void doInBackground(Task... task) {
             taskAsyncDao.insert(task[0]);
+            return null;
+        }
+    }
+
+    private static class AsyncDelete extends AsyncTask<Task, Void, Void> {
+        private TaskDao taskAsyncDao;
+
+        private AsyncDelete(TaskDao dao) {
+            this.taskAsyncDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(Task... task) {
+            taskAsyncDao.delete(task[0]);
+            return null;
+        }
+    }
+
+    private static class AsyncUpdate extends AsyncTask<Task, Void, Void> {
+        private TaskDao taskAsyncDao;
+
+        private AsyncUpdate(TaskDao dao) {
+            this.taskAsyncDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(Task... task) {
+            taskAsyncDao.update(task[0]);
             return null;
         }
     }
