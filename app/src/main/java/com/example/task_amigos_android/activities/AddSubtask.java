@@ -142,8 +142,6 @@ public class AddSubtask extends AppCompatActivity {
                 finish();
             }
         });
-
-
     }
 
     private void deleteTask(View view) {

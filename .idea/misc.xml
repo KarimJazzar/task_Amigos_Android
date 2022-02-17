@@ -3,29 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Karim/AndroidStudioProjects/task_Amigos_Android/app/src/main/res/layout/activity_add_edit_task.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Karim/AndroidStudioProjects/task_Amigos_Android/app/src/main/res/layout/activity_add_subtask.xml" value="0.33" />
-        <entry key="..\:/Users/Karim/AndroidStudioProjects/task_Amigos_Android/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Karim/AndroidStudioProjects/task_Amigos_Android/app/src/main/res/layout/fragment_attach.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Karim/AndroidStudioProjects/task_Amigos_Android/app/src/main/res/layout/fragment_info.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Karim/AndroidStudioProjects/task_Amigos_Android/app/src/main/res/layout/fragment_sub_task.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Karim/AndroidStudioProjects/task_Amigos_Android/app/src/main/res/layout/fragment_task.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Karim/AndroidStudioProjects/task_Amigos_Android/app/src/main/res/layout/subtask_view_layout.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Karim/AndroidStudioProjects/task_Amigos_Android/app/src/main/res/layout/task_rv_item.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Karim/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_spinner_item.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Simranjit Singh/AndroidStudioProjects/task_Amigos_Android/app/src/main/res/layout/activity_audio.xml" value="0.5" />
         <entry key="..\:/Users/Simranjit Singh/AndroidStudioProjects/task_Amigos_Android/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
         <entry key="app/src/main/res/layout/activity_add_edit_task.xml" value="0.3446557971014493" />
         <entry key="app/src/main/res/layout/activity_audio.xml" value="0.3446557971014493" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3011474609375" />
         <entry key="app/src/main/res/layout/category_rv_item.xml" value="0.32323232323232326" />
-        <entry key="app/src/main/res/layout/fragment_attach.xml" value="0.3446557971014493" />
+        <entry key="app/src/main/res/layout/fragment_attach.xml" value="0.5230432482733243" />
         <entry key="app/src/main/res/layout/fragment_category.xml" value="0.20502092050209206" />
         <entry key="app/src/main/res/layout/fragment_complete.xml" value="0.3446557971014493" />
         <entry key="app/src/main/res/layout/fragment_incomplete.xml" value="0.3446557971014493" />
         <entry key="app/src/main/res/layout/fragment_info.xml" value="0.3446557971014493" />
         <entry key="app/src/main/res/layout/fragment_sub_task.xml" value="0.3446557971014493" />
-        <entry key="app/src/main/res/layout/fragment_task.xml" value="0.32518310546875" />
+        <entry key="app/src/main/res/layout/fragment_task.xml" value="1.066934739357514" />
+        <entry key="app/src/main/res/layout/images_row.xml" value="0.5193491215884626" />
         <entry key="app/src/main/res/layout/task_rv_item.xml" value="0.10177862301083951" />
         <entry key="app/src/main/res/layout/task_view_layout.xml" value="0.3446557971014493" />
       </map>
