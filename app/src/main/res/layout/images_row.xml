@@ -60,7 +60,7 @@
                     android:id="@+id/imgImage"
                     android:layout_width="160dp"
                     android:layout_height="200dp"
-                    android:src="@drawable/defaut_image"
+                    android:src="@drawable/default_image"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtImg"
                      />

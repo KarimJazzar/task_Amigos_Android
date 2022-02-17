@@ -123,6 +123,7 @@ public class AddEditTaskActivity extends AppCompatActivity {
                 SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref",MODE_PRIVATE);
                 SharedPreferences.Editor myEdit = sharedPreferences.edit();
                 myEdit.putString("images", "");
+                myEdit.putString("audio", "");
                 myEdit.apply();
 
                 Intent intent = new Intent(AddEditTaskActivity.this, MainActivity.class);
@@ -155,6 +156,7 @@ public class AddEditTaskActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref",MODE_PRIVATE);
         SharedPreferences.Editor myEdit = sharedPreferences.edit();
         myEdit.putString("images", "");
+        myEdit.putString("audio", "");
         myEdit.apply();
     }
 }
