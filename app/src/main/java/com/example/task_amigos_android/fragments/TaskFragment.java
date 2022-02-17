@@ -19,6 +19,7 @@ import android.widget.FrameLayout;
 
 import com.example.task_amigos_android.R;
 import com.example.task_amigos_android.activities.AddEditTaskActivity;
+import com.example.task_amigos_android.activities.AudioActivity;
 import com.example.task_amigos_android.activities.MainActivity;
 import com.example.task_amigos_android.adapter.TaskRVAdapter;
 import com.example.task_amigos_android.entities.Task;
@@ -110,6 +111,9 @@ public class TaskFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent myIntent = new Intent(getActivity(), AddEditTaskActivity.class);
+
+                //Intent for audio testing
+                //Intent myIntent = new Intent(getActivity(), AudioActivity.class);
                 startActivity(myIntent);
             }
         });
