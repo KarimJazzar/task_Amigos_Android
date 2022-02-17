@@ -234,7 +234,7 @@ public class InfoFragment extends Fragment {
             isComplete = binding.statSpinner.getSelectedItemPosition() == 1;
             boolean allSubComplete = true;
 
-            /*
+
             for(Subtask subtask: subtasksShown){
                 System.out.println(subtask.getTitle());
                 if(subtask.getStatus() == false){
@@ -242,7 +242,7 @@ public class InfoFragment extends Fragment {
                     break;
                 }
             }
-            */
+
 
             if(allSubComplete){
                 tempTask.setStatus(isComplete);
@@ -260,12 +260,12 @@ public class InfoFragment extends Fragment {
             Toast.makeText(view.getContext(), "Task updated.", Toast.LENGTH_SHORT).show();
         } else {
             taskVM.insert(tempTask);
-            /*
+
             for(Subtask subtask: subtasksNew){
                 subtask.setTaskId(lastId+1);
                 subtaskVM.update(subtask);
             }
-            */
+
             Toast.makeText(view.getContext(), "Task created.", Toast.LENGTH_SHORT).show();
             clearInputs();
         }
