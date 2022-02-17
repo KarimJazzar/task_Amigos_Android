@@ -59,8 +59,6 @@ public class InfoFragment extends Fragment {
     private final String[] statusStr = {"Incomplete", "Complete"};
 
     public static Task taskSelected;
-    private List<Task> currentTasks;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -219,7 +217,6 @@ public class InfoFragment extends Fragment {
             Toast.makeText(view.getContext(), "Task updated.", Toast.LENGTH_SHORT).show();
         } else {
             taskVM.insert(tempTask);
-            //loadTasks();
             for(Subtask subtask: subtasksNew){
                 subtask.setTaskId(lastId+1);
                 subtaskVM.update(subtask);
@@ -256,17 +253,4 @@ public class InfoFragment extends Fragment {
         selectedTask = task;
     }
 
-    private void loadTasks() {
-        taskVM.getAllTask().observe(this, new Observer<List<Task>>() {
-            @Override
-            public void onChanged(@Nullable final List<Task> taskList) {
-                currentTasks.clear();
-
-                for(Task task: taskList) {
-                    currentTasks.add(task);
-                }
-
-            }
-        });
-    }
 }
