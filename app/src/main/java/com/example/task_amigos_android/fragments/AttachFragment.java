@@ -136,8 +136,7 @@ public class AttachFragment extends Fragment {
             }
 
             mypath = new File(selectedTask.getAudios().toString().replace("[","").replace("]","").replace(" ",""));
-            Log.e("AUDIO path => ", " "+mypath);
-            fragmentAttachBinding.txtAudName.setText(mypath.toString());
+            fragmentAttachBinding.txtAudName.setText( mypath.toString().substring(mypath.toString().lastIndexOf("/") + 1));
             ImagesAdapter adapter = new ImagesAdapter(getContext(),tempimages);
             fragmentAttachBinding.rvImages.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
             fragmentAttachBinding.rvImages.setAdapter(adapter);
@@ -208,7 +207,7 @@ public class AttachFragment extends Fragment {
                     mediaRecorder.stop();
                     mediaRecorder.release();
                     mediaRecorder = null;
-                    fragmentAttachBinding.txtAudName.setText( mypath.toString());
+                    fragmentAttachBinding.txtAudName.setText( mypath.toString().substring(mypath.toString().lastIndexOf("/") + 1));
                     Toast.makeText(getActivity(), "Recording Stopped", Toast.LENGTH_SHORT).show();
                 }else{
                     try
