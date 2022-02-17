@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -106,6 +107,7 @@ public class AddEditTaskActivity extends AppCompatActivity {
 
         if(selectedTask != null) {
             fragmentAdapter.sendTaskToInfoFragment(selectedTask);
+            fragmentAdapter.sendTaskToAttachFragment(selectedTask);
         }
     }
 
@@ -114,6 +116,12 @@ public class AddEditTaskActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 Log.e(TAG,"back");
+
+                SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+                SharedPreferences.Editor myEdit = sharedPreferences.edit();
+                myEdit.putString("images", "");
+                myEdit.apply();
+
                 Intent intent = new Intent(AddEditTaskActivity.this, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
@@ -130,9 +138,20 @@ public class AddEditTaskActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode== RESULT_OK){
-            Log.e(TAG,"okaaaaaaaaaaaay");
+        if (resultCode==this.RESULT_OK){
+            super.onActivityResult(requestCode, resultCode, data);
+            setResult(RESULT_OK, data);
         }
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+        SharedPreferences.Editor myEdit = sharedPreferences.edit();
+        myEdit.putString("images", "");
+        myEdit.apply();
     }
 }

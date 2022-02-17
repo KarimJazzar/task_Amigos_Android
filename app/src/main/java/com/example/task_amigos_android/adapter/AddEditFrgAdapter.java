@@ -46,5 +46,9 @@ public class AddEditFrgAdapter extends FragmentStateAdapter {
     public void sendTaskToInfoFragment(Task task) {
         infoFrag.setSelectedTask(task);
     }
+
+    public void sendTaskToAttachFragment(Task task) {
+        attachFrag.setSelectedTask(task);
+    }
 }
 

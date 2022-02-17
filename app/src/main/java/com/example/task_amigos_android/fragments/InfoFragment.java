@@ -1,7 +1,10 @@
 package com.example.task_amigos_android.fragments;
 
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -29,6 +32,7 @@ import com.example.task_amigos_android.databinding.FragmentInfoBinding;
 import com.example.task_amigos_android.helpers.DateHelper;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -52,8 +56,18 @@ public class InfoFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+        SharedPreferences sh = getActivity().getSharedPreferences("MySharedPref", MODE_PRIVATE);
+        images = sh.getString("images", "");
+
+        Log.v(TAG,"  "+ images);
+
+
         taskVM = new ViewModelProvider(this).get(TaskViewModel.class);
     }
+
+    String images;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -61,6 +75,7 @@ public class InfoFragment extends Fragment {
 
         getActivity().setTitle("Add Task");
         infoRepository = new InfoRepository();
+
 
 
         binding = FragmentInfoBinding.inflate(inflater, container, false);
@@ -189,7 +204,7 @@ public class InfoFragment extends Fragment {
         tempTask.setDescription(description);
         tempTask.setDueDate(duDate);
         tempTask.setCreationDate(DateHelper.getCurrentDate());
-        //tempTask.setImages();
+        tempTask.setImages(Collections.singletonList(images));
         //tempTask.setAudios();
         tempTask.setStatus(isComplete);
 
@@ -211,6 +226,7 @@ public class InfoFragment extends Fragment {
         binding.edtDesc.setText("");
     }
 
+
     public void setCategoryList(List<Category> categories) {
         this.categories = categories;
 
@@ -231,5 +247,14 @@ public class InfoFragment extends Fragment {
     public void setSelectedTask(Task task) {
         isEditMode = true;
         selectedTask = task;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        SharedPreferences sh = getActivity().getSharedPreferences("MySharedPref", MODE_PRIVATE);
+        images = sh.getString("images", "");
+
     }
 }
