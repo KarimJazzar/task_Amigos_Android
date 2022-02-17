@@ -23,6 +23,8 @@ import com.example.task_amigos_android.helpers.CategoryHelper;
 import com.example.task_amigos_android.helpers.DateHelper;
 
 public class TaskRVAdapter extends ListAdapter<Task, TaskRVAdapter.ViewHolder> {
+
+    public static Task taskSelected;
     // creating a variable for on item click listener.
     private OnItemClickListener listener;
 
@@ -98,6 +100,7 @@ public class TaskRVAdapter extends ListAdapter<Task, TaskRVAdapter.ViewHolder> {
 
                     Intent intent = new Intent(context, AddEditTaskActivity.class);
                     intent.putExtra("Task", getTaskAt(position));
+                    taskSelected = getTaskAt(position);
                     context.startActivity(intent);
 
                     if (listener != null && position != RecyclerView.NO_POSITION) {

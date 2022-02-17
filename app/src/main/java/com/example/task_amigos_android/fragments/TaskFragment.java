@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,6 @@ import android.widget.FrameLayout;
 
 import com.example.task_amigos_android.R;
 import com.example.task_amigos_android.activities.AddEditTaskActivity;
-import com.example.task_amigos_android.activities.MainActivity;
 import com.example.task_amigos_android.adapter.TaskRVAdapter;
 import com.example.task_amigos_android.entities.Task;
 import com.example.task_amigos_android.helpers.AnimationHelper;
@@ -122,7 +120,7 @@ public class TaskFragment extends Fragment {
         completeRV.setHasFixedSize(true);
         completeRV.setAdapter(completeAdapter);
 
-        incompleteRV = (RecyclerView) view.findViewById(R.id.incompleteRV);
+        incompleteRV = (RecyclerView) view.findViewById(R.id.subtaskList);
         incompleteRV.setLayoutManager(new LinearLayoutManager(context));
         incompleteRV.setHasFixedSize(true);
         incompleteRV.setAdapter(incompleteAdapter);

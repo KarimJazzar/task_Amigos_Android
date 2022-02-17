@@ -41,6 +41,10 @@ public class MainActivity extends AppCompatActivity {
     private FragmentAdapter fragmentAdapter;
     public static boolean ignoreSwipe = false;
 
+    public static boolean isSubtask = false;
+
+    public static int lastId = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,8 +99,12 @@ public class MainActivity extends AppCompatActivity {
                 for(Task task: taskList) {
                     if (task.getStatus() == true) {
                         completeList.add(task);
+
                     } else {
                         incompleteList.add(task);
+                    }
+                    if(task.getId()>=lastId){
+                        lastId = task.getId();
                     }
                 }
 

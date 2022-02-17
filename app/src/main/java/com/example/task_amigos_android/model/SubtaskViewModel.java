@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import com.example.task_amigos_android.entities.Subtask;
+import com.example.task_amigos_android.entities.Task;
 import com.example.task_amigos_android.repositories.SubtaskRepository;
 
 import java.util.List;
@@ -27,4 +28,7 @@ public class SubtaskViewModel extends AndroidViewModel {
     public void insert(Subtask subtask) {
         subtaskRepo.insert(subtask);
     }
+    public void delete(Subtask task) { subtaskRepo.delete(task); }
+
+    public void update(Subtask task) { subtaskRepo.update(task); }
 }
