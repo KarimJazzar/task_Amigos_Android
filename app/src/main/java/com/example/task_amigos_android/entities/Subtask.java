@@ -4,6 +4,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.Date;
+
 @Entity
 public class Subtask {
     @PrimaryKey(autoGenerate = true)
@@ -20,6 +22,12 @@ public class Subtask {
 
     @ColumnInfo(name = "task_id")
     private int taskId;
+
+    @ColumnInfo(name = "due_date")
+    private Date dueDate;
+
+    @ColumnInfo(name = "creation_data")
+    private Date creationDate;
 
     public int getId() {
         return id;
@@ -50,7 +58,7 @@ public class Subtask {
     }
 
     public void setStatus(Boolean completed) {
-        this.status = status;
+        this.status = completed;
     }
 
     public int getTaskId() {
@@ -59,5 +67,21 @@ public class Subtask {
 
     public void setTaskId(int taskId) {
         this.taskId = taskId;
+    }
+
+    public Date getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(Date dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 }

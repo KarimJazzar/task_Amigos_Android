@@ -1,6 +1,11 @@
 package com.example.task_amigos_android.fragments;
 
 
+import static com.example.task_amigos_android.activities.MainActivity.isSubtask;
+import static com.example.task_amigos_android.activities.MainActivity.lastId;
+import static com.example.task_amigos_android.fragments.SubTaskFragment.subtasksNew;
+import static com.example.task_amigos_android.fragments.SubTaskFragment.subtasksShown;
+
 import static android.content.Context.MODE_PRIVATE;
 
 import android.content.Context;
@@ -10,6 +15,8 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.util.Log;
@@ -22,14 +29,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.task_amigos_android.adapter.TaskAdapter;
 import com.example.task_amigos_android.entities.Category;
+import com.example.task_amigos_android.entities.Subtask;
 import com.example.task_amigos_android.entities.Task;
 import com.example.task_amigos_android.helpers.CategoryHelper;
 import com.example.task_amigos_android.model.CategoryViewModel;
+import com.example.task_amigos_android.model.SubtaskViewModel;
 import com.example.task_amigos_android.model.TaskViewModel;
 import com.example.task_amigos_android.repositories.InfoRepository;
 import com.example.task_amigos_android.databinding.FragmentInfoBinding;
 import com.example.task_amigos_android.helpers.DateHelper;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -49,8 +60,11 @@ public class InfoFragment extends Fragment {
     private List<String> catStr = new ArrayList<>();
     private boolean isEditMode = false;
     private TaskViewModel taskVM;
+    private SubtaskViewModel subtaskVM;
     private Task selectedTask = new Task();
     private final String[] statusStr = {"Incomplete", "Complete"};
+
+    public static Task taskSelected;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,6 +78,8 @@ public class InfoFragment extends Fragment {
 
 
         taskVM = new ViewModelProvider(this).get(TaskViewModel.class);
+        subtaskVM = new ViewModelProvider(this).get(SubtaskViewModel.class);
+
     }
 
     String images;
@@ -72,88 +88,89 @@ public class InfoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-        getActivity().setTitle("Add Task");
-        infoRepository = new InfoRepository();
-
+            getActivity().setTitle("Add Task");
+            infoRepository = new InfoRepository();
 
 
-        binding = FragmentInfoBinding.inflate(inflater, container, false);
-        View view = binding.getRoot();
+            binding = FragmentInfoBinding.inflate(inflater, container, false);
+            View view = binding.getRoot();
 
-        statusAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, statusStr);
-        statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            statusAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, statusStr);
+            statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        binding.statSpinner.setAdapter(statusAdapter);
-        binding.statSpinner.setSelection(0);
+            binding.statSpinner.setAdapter(statusAdapter);
+            binding.statSpinner.setSelection(0);
 
-        binding.statSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-        {
-            @Override
-            public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
-              binding.statSpinner.setSelection(position);
+            binding.statSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+            {
+                @Override
+                public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
+                    binding.statSpinner.setSelection(position);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> arg0) {
+                }
+            });
+
+            categoryAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, catStr);
+            categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            binding.catSpinner.setAdapter(categoryAdapter);
+            binding.catSpinner.setSelection(0);
+            setCategoryList(CategoryHelper.categories);
+
+            binding.catSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+            {
+                @Override
+                public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
+                    binding.catSpinner.setSelection(position);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> arg0) {
+                }
+            });
+
+            binding.txtCreationDate.setText(DateHelper.getCurrentDateAsString());
+            binding.txtDuedate.setText(DateHelper.getCurrentDateAsString());
+            binding.txtDuedate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    infoRepository.selectDate(binding,getContext());
+                }
+            });
+
+            binding.btnSave.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    saveTask(view);
+                }
+            });
+
+            if (!isEditMode) {
+                binding.btnDelete.setAlpha(0);
+                binding.btnDelete.setEnabled(false);
+                binding.statSpinner.setEnabled(false);
+                taskSelected = null;
+            } else {
+                binding.edtName.setText(selectedTask.getTitle());
+                binding.edtDesc.setText(selectedTask.getDescription());
+                binding.catSpinner.setSelection(CategoryHelper.getCategoryIndex(selectedTask.getCategory()));
+                binding.statSpinner.setSelection(selectedTask.getStatus() ? 1 : 0);
+                binding.txtDuedate.setText(DateHelper.dateToString(selectedTask.getDueDate()));
+                binding.txtCreationDate.setText(DateHelper.dateToString(selectedTask.getCreationDate()));
+                taskSelected = selectedTask;
             }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> arg0) {
-            }
-        });
+            binding.btnDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    deleteTask(view);
+                }
+            });
+            return view;
 
-        categoryAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, catStr);
-        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        binding.catSpinner.setAdapter(categoryAdapter);
-        binding.catSpinner.setSelection(0);
-        setCategoryList(CategoryHelper.categories);
-
-        binding.catSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-        {
-            @Override
-            public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
-              binding.catSpinner.setSelection(position);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> arg0) {
-            }
-        });
-
-        binding.txtCreationDate.setText(DateHelper.getCurrentDateAsString());
-        binding.txtDuedate.setText(DateHelper.getCurrentDateAsString());
-        binding.txtDuedate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                infoRepository.selectDate(binding,getContext());
-            }
-        });
-
-        binding.btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                saveTask(view);
-            }
-        });
-
-        if (!isEditMode) {
-            binding.btnDelete.setAlpha(0);
-            binding.btnDelete.setEnabled(false);
-            binding.statSpinner.setEnabled(false);
-        } else {
-            binding.edtName.setText(selectedTask.getTitle());
-            binding.edtDesc.setText(selectedTask.getDescription());
-            binding.catSpinner.setSelection(CategoryHelper.getCategoryIndex(selectedTask.getCategory()));
-            binding.statSpinner.setSelection(selectedTask.getStatus() ? 1 : 0);
-            binding.txtDuedate.setText(DateHelper.dateToString(selectedTask.getDueDate()));
-            binding.txtCreationDate.setText(DateHelper.dateToString(selectedTask.getCreationDate()));
-        }
-
-        binding.btnDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                deleteTask(view);
-            }
-        });
-        return view;
     }
 
     @Override
@@ -198,6 +215,8 @@ public class InfoFragment extends Fragment {
             return;
         }
 
+
+
         Task tempTask = new Task();
         tempTask.setTitle(title);
         tempTask.setCategory(category);
@@ -207,15 +226,37 @@ public class InfoFragment extends Fragment {
         tempTask.setImages(Collections.singletonList(images));
         //tempTask.setAudios();
         tempTask.setStatus(isComplete);
-
         if (isEditMode) {
+
             isComplete = binding.statSpinner.getSelectedItemPosition() == 1;
-            tempTask.setStatus(isComplete);
+            boolean allSubComplete = true;
+            for(Subtask subtask: subtasksShown){
+                System.out.println(subtask.getTitle());
+                if(subtask.getStatus() == false){
+                    allSubComplete = false;
+                    break;
+                }
+            }
+            if(allSubComplete){
+                tempTask.setStatus(isComplete);
+            }else{
+                if(isComplete == true){
+                    tempTask.setStatus(false);
+                    Snackbar snackbar = Snackbar
+                            .make(view, "Subtasks need to be completed first!", Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                }
+            }
+
             tempTask.setId(selectedTask.getId());
             taskVM.update(tempTask);
             Toast.makeText(view.getContext(), "Task updated.", Toast.LENGTH_SHORT).show();
         } else {
             taskVM.insert(tempTask);
+            for(Subtask subtask: subtasksNew){
+                subtask.setTaskId(lastId+1);
+                subtaskVM.update(subtask);
+            }
             Toast.makeText(view.getContext(), "Task created.", Toast.LENGTH_SHORT).show();
             clearInputs();
         }
@@ -225,7 +266,6 @@ public class InfoFragment extends Fragment {
         binding.edtName.setText("");
         binding.edtDesc.setText("");
     }
-
 
     public void setCategoryList(List<Category> categories) {
         this.categories = categories;

@@ -1,5 +1,7 @@
 package com.example.task_amigos_android.activities;
 
+import static com.example.task_amigos_android.adapter.TaskRVAdapter.taskSelected;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -46,6 +48,7 @@ public class AddEditTaskActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         binding = ActivityAddEditTaskBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
