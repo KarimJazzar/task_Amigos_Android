@@ -253,10 +253,12 @@ public class InfoFragment extends Fragment {
             Toast.makeText(view.getContext(), "Task updated.", Toast.LENGTH_SHORT).show();
         } else {
             taskVM.insert(tempTask);
+            /*
             for(Subtask subtask: subtasksNew){
                 subtask.setTaskId(lastId+1);
                 subtaskVM.update(subtask);
             }
+            */
             Toast.makeText(view.getContext(), "Task created.", Toast.LENGTH_SHORT).show();
             clearInputs();
         }

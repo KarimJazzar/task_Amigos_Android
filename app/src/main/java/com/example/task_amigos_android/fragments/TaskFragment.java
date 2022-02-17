@@ -14,8 +14,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.TranslateAnimation;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.Spinner;
 
 import com.example.task_amigos_android.R;
 import com.example.task_amigos_android.activities.AddEditTaskActivity;
@@ -25,6 +28,8 @@ import com.example.task_amigos_android.adapter.TaskRVAdapter;
 import com.example.task_amigos_android.entities.Task;
 import com.example.task_amigos_android.helpers.AnimationHelper;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -34,15 +39,20 @@ import java.util.List;
  */
 public class TaskFragment extends Fragment {
 
-    private Button addTaskBtn;
+    private Button addTaskBtn, clearBtn, searchBtn;
+    private EditText searchInput;
+    private Spinner sortDropdown;
     private FrameLayout completeCol;
     private FrameLayout incompleteCol;
     private RecyclerView completeRV;
     private RecyclerView incompleteRV;
+    private List<Task> incompleteTask = new ArrayList<>();
+    private List<Task> completeTask = new ArrayList<>();
     private TaskRVAdapter completeAdapter = new TaskRVAdapter();
     private TaskRVAdapter incompleteAdapter = new TaskRVAdapter();
     private int animType = TranslateAnimation.ABSOLUTE;
     private float colMargin = 0;
+    private int selectedSort = 0;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -58,6 +68,9 @@ public class TaskFragment extends Fragment {
     }
 
     public void updateAdaptersList(List<Task> incompleteTask, List<Task> completeTask) {
+        this.incompleteTask = incompleteTask;
+        this.completeTask = completeTask;
+
         incompleteAdapter.submitList(incompleteTask);
         completeAdapter.submitList(completeTask);
     }
@@ -118,6 +131,22 @@ public class TaskFragment extends Fragment {
             }
         });
 
+        searchInput = (EditText) view.findViewById(R.id.searchInput);
+        clearBtn = (Button) view.findViewById(R.id.clearSearchBtn);
+        searchBtn = (Button) view.findViewById(R.id.searchBtn);
+        sortDropdown = (Spinner) view.findViewById(R.id.sortDropdown);
+
+        sortDropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                selectedSort = position;
+                sortTask();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) { }
+        });
+
         completeCol = (FrameLayout) view.findViewById(R.id.completeCol);
         incompleteCol = (FrameLayout) view.findViewById(R.id.incompleteCol);
 
@@ -130,6 +159,16 @@ public class TaskFragment extends Fragment {
         incompleteRV.setLayoutManager(new LinearLayoutManager(context));
         incompleteRV.setHasFixedSize(true);
         incompleteRV.setAdapter(incompleteAdapter);
+    }
+
+    private void sortTask() {
+        if (selectedSort == 0) {
+
+        } else if (selectedSort == 1) {
+
+        } else {
+            Comparator<Task> sortByTitle = (o1, o2) -> o1.getTitle().compareTo(o2.getTitle());
+        }
     }
 
     @Override

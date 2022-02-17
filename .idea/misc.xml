@@ -15,8 +15,9 @@
         <entry key="app/src/main/res/layout/fragment_incomplete.xml" value="0.3446557971014493" />
         <entry key="app/src/main/res/layout/fragment_info.xml" value="0.3446557971014493" />
         <entry key="app/src/main/res/layout/fragment_sub_task.xml" value="0.3446557971014493" />
-        <entry key="app/src/main/res/layout/fragment_task.xml" value="1.066934739357514" />
+        <entry key="app/src/main/res/layout/fragment_task.xml" value="0.26887871853546913" />
         <entry key="app/src/main/res/layout/images_row.xml" value="0.5193491215884626" />
+        <entry key="app/src/main/res/layout/subtask_view_layout.xml" value="0.16995947315096252" />
         <entry key="app/src/main/res/layout/task_rv_item.xml" value="0.10177862301083951" />
         <entry key="app/src/main/res/layout/task_view_layout.xml" value="0.3446557971014493" />
       </map>
