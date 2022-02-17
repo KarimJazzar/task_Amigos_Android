@@ -79,7 +79,7 @@ public class SubTaskFragment extends Fragment {
     Button addSubtask;
     SubtaskViewModel subtaskViewModel;
     List<Subtask> subtasks;
-    List<Subtask> subtasksShown;
+    public static List<Subtask> subtasksShown;
     public static List<Subtask> subtasksNew;
 
     TaskAdapter subAdapter;
@@ -90,6 +90,7 @@ public class SubTaskFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         addSubtask = (Button) view.findViewById(R.id.addSubtask);
         subList = view.findViewById(R.id.subtaskList);
         isSubtask = true;
@@ -121,6 +122,7 @@ public class SubTaskFragment extends Fragment {
                 startActivity(new Intent(view.getContext(), AddSubtask.class));
             }
         });
+
     }
 
     @Override

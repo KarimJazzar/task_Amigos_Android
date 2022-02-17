@@ -4,6 +4,7 @@ package com.example.task_amigos_android.fragments;
 import static com.example.task_amigos_android.activities.MainActivity.isSubtask;
 import static com.example.task_amigos_android.activities.MainActivity.lastId;
 import static com.example.task_amigos_android.fragments.SubTaskFragment.subtasksNew;
+import static com.example.task_amigos_android.fragments.SubTaskFragment.subtasksShown;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -39,6 +40,7 @@ import com.example.task_amigos_android.model.TaskViewModel;
 import com.example.task_amigos_android.repositories.InfoRepository;
 import com.example.task_amigos_android.databinding.FragmentInfoBinding;
 import com.example.task_amigos_android.helpers.DateHelper;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -213,6 +215,8 @@ public class InfoFragment extends Fragment {
             return;
         }
 
+
+
         Task tempTask = new Task();
         tempTask.setTitle(title);
         tempTask.setCategory(category);
@@ -222,10 +226,28 @@ public class InfoFragment extends Fragment {
         tempTask.setImages(Collections.singletonList(images));
         //tempTask.setAudios();
         tempTask.setStatus(isComplete);
-
         if (isEditMode) {
+
             isComplete = binding.statSpinner.getSelectedItemPosition() == 1;
-            tempTask.setStatus(isComplete);
+            boolean allSubComplete = true;
+            for(Subtask subtask: subtasksShown){
+                System.out.println(subtask.getTitle());
+                if(subtask.getStatus() == false){
+                    allSubComplete = false;
+                    break;
+                }
+            }
+            if(allSubComplete){
+                tempTask.setStatus(isComplete);
+            }else{
+                if(isComplete == true){
+                    tempTask.setStatus(false);
+                    Snackbar snackbar = Snackbar
+                            .make(view, "Subtasks need to be completed first!", Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                }
+            }
+
             tempTask.setId(selectedTask.getId());
             taskVM.update(tempTask);
             Toast.makeText(view.getContext(), "Task updated.", Toast.LENGTH_SHORT).show();
