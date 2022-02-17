@@ -29,6 +29,8 @@ import com.example.task_amigos_android.entities.Task;
 import com.example.task_amigos_android.helpers.AnimationHelper;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -163,12 +165,20 @@ public class TaskFragment extends Fragment {
 
     private void sortTask() {
         if (selectedSort == 0) {
-
+            Comparator<Task> sortByTitle = (o1, o2) -> o1.getCreationDate().compareTo(o2.getCreationDate());
+            Collections.sort(incompleteTask, sortByTitle);
+            Collections.sort(completeTask, sortByTitle);
         } else if (selectedSort == 1) {
-
+            Comparator<Task> sortByTitle = (o1, o2) -> o1.getDueDate().compareTo(o2.getDueDate());
+            Collections.sort(incompleteTask, sortByTitle);
+            Collections.sort(completeTask, sortByTitle);
         } else {
-            Comparator<Task> sortByTitle = (o1, o2) -> o1.getTitle().compareTo(o2.getTitle());
+            Comparator<Task> sortByTitle = (o1, o2) -> o1.getTitle().compareToIgnoreCase(o2.getTitle());
+            Collections.sort(incompleteTask, sortByTitle);
+            Collections.sort(completeTask, sortByTitle);
         }
+
+        refreshAdapter();
     }
 
     @Override

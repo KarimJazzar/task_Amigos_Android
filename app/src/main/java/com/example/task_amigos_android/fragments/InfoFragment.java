@@ -230,6 +230,8 @@ public class InfoFragment extends Fragment {
 
             isComplete = binding.statSpinner.getSelectedItemPosition() == 1;
             boolean allSubComplete = true;
+
+            /*
             for(Subtask subtask: subtasksShown){
                 System.out.println(subtask.getTitle());
                 if(subtask.getStatus() == false){
@@ -237,6 +239,8 @@ public class InfoFragment extends Fragment {
                     break;
                 }
             }
+            */
+
             if(allSubComplete){
                 tempTask.setStatus(isComplete);
             }else{
