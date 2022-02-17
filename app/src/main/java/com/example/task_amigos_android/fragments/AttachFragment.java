@@ -4,11 +4,16 @@ import static android.app.Activity.RESULT_OK;
 import static android.content.Context.MODE_PRIVATE;
 
 import android.app.AlertDialog;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.media.MediaPlayer;
+import android.media.MediaRecorder;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.activity.result.ActivityResult;
@@ -27,6 +32,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.task_amigos_android.R;
 import com.example.task_amigos_android.activities.AddEditTaskActivity;
 import com.example.task_amigos_android.adapter.ImagesAdapter;
 import com.example.task_amigos_android.entities.Task;
@@ -34,8 +40,11 @@ import com.example.task_amigos_android.repositories.AttachRespository;
 import com.example.task_amigos_android.databinding.FragmentAttachBinding;
 import com.example.task_amigos_android.helpers.PermissionsHelper;
 
+import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Set;
 
 public class AttachFragment extends Fragment {
@@ -50,6 +59,11 @@ public class AttachFragment extends Fragment {
    ActivityResultLauncher<Intent> activityResultCamera;
    ActivityResultLauncher<String> activityResultGallery;
     private Task selectedTask = new Task();
+    private boolean isRecording;
+    private MediaRecorder mediaRecorder;
+    private MediaPlayer mediaPlayer;
+    File mypath;
+    SharedPreferences sharedPreferences;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -72,7 +86,7 @@ public class AttachFragment extends Fragment {
                     fragmentAttachBinding.rvImages.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
                     fragmentAttachBinding.rvImages.setAdapter(adapter);
 
-                    SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MySharedPref",MODE_PRIVATE);
+                    sharedPreferences = getActivity().getSharedPreferences("MySharedPref",MODE_PRIVATE);
                     SharedPreferences.Editor myEdit = sharedPreferences.edit();
                     myEdit.putString("images", String.valueOf(tempimages));
                     myEdit.apply();
@@ -94,7 +108,7 @@ public class AttachFragment extends Fragment {
                     fragmentAttachBinding.rvImages.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
                     fragmentAttachBinding.rvImages.setAdapter(adapter);
 
-                    SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MySharedPref",MODE_PRIVATE);
+                    sharedPreferences = getActivity().getSharedPreferences("MySharedPref",MODE_PRIVATE);
                     SharedPreferences.Editor myEdit = sharedPreferences.edit();
                     myEdit.putString("images", String.valueOf(tempimages));
                     myEdit.apply();
@@ -116,11 +130,14 @@ public class AttachFragment extends Fragment {
         if(isEditMode){
 
             for(int i=0;i<selectedTask.getImages().size();i++){
+
                 tempimages.add(selectedTask.getImages().get(i).replace("[","").replace("]","").replace(" ",""));
-                Log.v(TAG," huy "+ selectedTask.getImages().get(i).replace("[","").replace("]","").replace(" ",""));
 
             }
 
+            mypath = new File(selectedTask.getAudios().toString().replace("[","").replace("]","").replace(" ",""));
+            Log.e("AUDIO path => ", " "+mypath);
+            fragmentAttachBinding.txtAudName.setText(mypath.toString());
             ImagesAdapter adapter = new ImagesAdapter(getContext(),tempimages);
             fragmentAttachBinding.rvImages.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
             fragmentAttachBinding.rvImages.setAdapter(adapter);
@@ -181,7 +198,81 @@ public class AttachFragment extends Fragment {
         });
 
 
+        fragmentAttachBinding.btnRecord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(isRecording)
+                {
+                    fragmentAttachBinding.btnRecord.setText("Record");
+                    isRecording=false;
+                    mediaRecorder.stop();
+                    mediaRecorder.release();
+                    mediaRecorder = null;
+                    fragmentAttachBinding.txtAudName.setText( mypath.toString());
+                    Toast.makeText(getActivity(), "Recording Stopped", Toast.LENGTH_SHORT).show();
+                }else{
+                    try
+                    {
 
+                        ContextWrapper cw = new ContextWrapper(getActivity().getApplicationContext());
+
+                        File directory = cw.getDir("audioDir", MODE_PRIVATE);
+                        // Create imageDir
+
+                        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+                        String audioFileName = "3GP_" + timeStamp  ;
+                        mypath=new File(directory,audioFileName+".3gp");
+
+                        sharedPreferences = getActivity().getSharedPreferences("MySharedPref",MODE_PRIVATE);
+                        SharedPreferences.Editor myEdit = sharedPreferences.edit();
+                        myEdit.putString("audio", String.valueOf(mypath));
+                        myEdit.apply();
+
+                        mediaRecorder = new MediaRecorder();
+                        mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+                        mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            mediaRecorder.setOutputFile(mypath);
+                        }
+                        mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+                        mediaRecorder.prepare();
+                        mediaRecorder.start();
+                        fragmentAttachBinding.btnRecord.setText("Stop");
+                        isRecording = true;
+
+                        Toast.makeText(getActivity(), "Recording Started.", Toast.LENGTH_SHORT).show();
+                    }catch(Exception e){
+                        e.printStackTrace();
+                        Log.e("AUDIO ERROR => ", ""+e.toString());
+                        Toast.makeText(getActivity(), "error", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+
+            }
+
+        });
+
+        fragmentAttachBinding.btnPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                try {
+                    Log.v("AUDIO path => ", ""+String.valueOf(mypath));
+
+
+                    mediaPlayer = new MediaPlayer();
+                    mediaPlayer.setDataSource(String.valueOf(mypath));
+                    mediaPlayer.prepare();
+                    mediaPlayer.start();
+
+                }catch (Exception e)
+                {
+                    e.printStackTrace();
+                    Log.e("AUDIO ERROR => ", ""+e.toString());
+                }
+            }
+        });
         return view;
     }
 

@@ -65,6 +65,8 @@ public class InfoFragment extends Fragment {
     private final String[] statusStr = {"Incomplete", "Complete"};
 
     public static Task taskSelected;
+    String images;
+    String audio;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -73,6 +75,7 @@ public class InfoFragment extends Fragment {
 
         SharedPreferences sh = getActivity().getSharedPreferences("MySharedPref", MODE_PRIVATE);
         images = sh.getString("images", "");
+        audio = sh.getString("audio", "");
 
         Log.v(TAG,"  "+ images);
 
@@ -82,7 +85,7 @@ public class InfoFragment extends Fragment {
 
     }
 
-    String images;
+
 
 
     @Override
@@ -224,7 +227,7 @@ public class InfoFragment extends Fragment {
         tempTask.setDueDate(duDate);
         tempTask.setCreationDate(DateHelper.getCurrentDate());
         tempTask.setImages(Collections.singletonList(images));
-        //tempTask.setAudios();
+        tempTask.setAudios(Collections.singletonList(audio));
         tempTask.setStatus(isComplete);
         if (isEditMode) {
 
@@ -295,6 +298,7 @@ public class InfoFragment extends Fragment {
 
         SharedPreferences sh = getActivity().getSharedPreferences("MySharedPref", MODE_PRIVATE);
         images = sh.getString("images", "");
+        audio = sh.getString("audio", "");
 
     }
 }
