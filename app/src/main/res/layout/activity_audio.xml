@@ -42,9 +42,11 @@
         android:layout_height="48dp"
         android:layout_marginStart="23dp"
         android:layout_marginTop="60dp"
+        android:layout_marginEnd="20dp"
         android:background="#03A9F4"
         android:text="@string/stop"
         android:textColor="#212121"
+        app:layout_constraintEnd_toStartOf="@+id/chooseButton"
         app:layout_constraintStart_toEndOf="@+id/recordButton"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
@@ -66,59 +68,36 @@
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="112dp"
         android:layout_height="57dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginBottom="17dp"
+        android:layout_marginStart="276dp"
+        android:layout_marginBottom="16dp"
         android:background="#F44336"
         android:text="@string/delete"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/saveButton"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="112dp"
-        android:layout_height="57dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="17dp"
-        android:background="#00BCD4"
-        android:text="@string/save"
-        android:textColor="#283593"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <SeekBar
-        android:id="@+id/seekBar"
-        android:layout_width="276dp"
-        android:layout_height="35dp"
-        android:layout_marginBottom="76dp"
-        app:layout_constraintBottom_toTopOf="@+id/deleteButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <ImageButton
         android:id="@+id/stopAudioButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="77dp"
-        android:layout_marginEnd="12dp"
+        android:layout_width="75dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="88dp"
+        android:layout_marginEnd="28dp"
         android:contentDescription="@string/todo"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chooseButton"
-        app:srcCompat="@drawable/ic_baseline_stop_24"/>
+        app:srcCompat="@drawable/ic_baseline_stop_24" />
 
     <ImageButton
         android:id="@+id/playButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="77dp"
+        android:layout_width="86dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="88dp"
+        android:contentDescription="@string/todo"
         android:minHeight="48dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recordButton"
-        app:srcCompat="@drawable/ic_baseline_play_arrow_24"
-        android:contentDescription="@string/todo" />
+        app:srcCompat="@drawable/ic_baseline_play_arrow_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
