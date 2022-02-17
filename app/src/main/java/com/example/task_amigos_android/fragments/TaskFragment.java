@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.task_amigos_android.R;
 import com.example.task_amigos_android.activities.AddEditTaskActivity;
@@ -137,6 +138,49 @@ public class TaskFragment extends Fragment {
         clearBtn = (Button) view.findViewById(R.id.clearSearchBtn);
         searchBtn = (Button) view.findViewById(R.id.searchBtn);
         sortDropdown = (Spinner) view.findViewById(R.id.sortDropdown);
+
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String keyword = searchInput.getText().toString();
+
+                if (keyword.equals("")) {
+                    Toast.makeText(view.getContext(), "Write a word to search.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                List<Task> tempIncomplete = new ArrayList<>();
+                List<Task> tempComplete = new ArrayList<>();
+
+                for(Task task : incompleteTask) {
+                    if(task.getTitle().contains(keyword) || task.getDescription().contains(keyword)) {
+                        tempIncomplete.add(task);
+                    }
+                }
+
+                for(Task task : completeTask) {
+                    if(task.getTitle().contains(keyword) || task.getDescription().contains(keyword)) {
+                        tempComplete.add(task);
+                    }
+                }
+
+                incompleteAdapter.submitList(tempIncomplete);
+                completeAdapter.submitList(tempComplete);
+            }
+        });
+
+        clearBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                searchInput.setText("");
+
+                incompleteAdapter.submitList(incompleteTask);
+                completeAdapter.submitList(completeTask);
+
+                sortTask();
+            }
+        });
+
 
         sortDropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
